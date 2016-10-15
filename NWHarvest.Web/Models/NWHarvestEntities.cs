@@ -12,25 +12,25 @@ namespace NWHarvest.Web.Models
         {
         }
 
-        public virtual DbSet<Farmer> Farmers { get; set; }
+        public virtual DbSet<Grower> Farmers { get; set; }
         public virtual DbSet<FoodBank> FoodBanks { get; set; }
         public virtual DbSet<Listing> Listings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Farmer>()
+            modelBuilder.Entity<Grower>()
                 .Property(e => e.name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Farmer>()
+            modelBuilder.Entity<Grower>()
                 .Property(e => e.phone)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Farmer>()
+            modelBuilder.Entity<Grower>()
                 .Property(e => e.email)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Farmer>()
+            modelBuilder.Entity<Grower>()
                 .HasMany(e => e.Listings)
                 .WithRequired(e => e.Farmer)
                 .HasForeignKey(e => e.listing_farmer)

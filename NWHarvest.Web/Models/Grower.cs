@@ -6,11 +6,11 @@ namespace NWHarvest.Web.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Farmer")]
-    public partial class Farmer
+    [Table("Grower")]
+    public partial class Grower
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Farmer()
+        public Grower()
         {
             Listings = new HashSet<Listing>();
         }
