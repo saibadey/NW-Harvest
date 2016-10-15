@@ -302,6 +302,7 @@
     <Content Include="Views\Listings\Claim.cshtml" />
     <Content Include="Views\Growers\DashboardView.cshtml" />
     <Content Include="Views\Account\FoodBankRegister.cshtml" />
+    <Content Include="Views\FoodBanks\DashboardView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
