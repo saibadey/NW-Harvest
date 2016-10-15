@@ -29,12 +29,33 @@ namespace NWHarvest.Web.Models
             modelBuilder.Entity<Grower>()
                 .Property(e => e.email)
                 .IsUnicode(false);
+            modelBuilder.Entity<Grower>()
+                .Property(e => e.address1)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Grower>()
-                .HasMany(e => e.Listings)
-                .WithRequired(e => e.Farmer)
-                .HasForeignKey(e => e.listing_farmer)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.address2)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Grower>()
+                .Property(e => e.address3)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Grower>()
+                .Property(e => e.address4)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Grower>()
+                .Property(e => e.city)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Grower>()
+                .Property(e => e.state)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Grower>()
+                .Property(e => e.zip)
+                .IsUnicode(false);
 
             modelBuilder.Entity<FoodBank>()
                 .Property(e => e.name)
@@ -49,8 +70,32 @@ namespace NWHarvest.Web.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<FoodBank>()
-                .Property(e => e.latlong)
-                .HasPrecision(9, 6);
+               .Property(e => e.address1)
+               .IsUnicode(false);
+
+            modelBuilder.Entity<FoodBank>()
+                .Property(e => e.address2)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FoodBank>()
+                .Property(e => e.address3)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FoodBank>()
+                .Property(e => e.address4)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FoodBank>()
+                .Property(e => e.city)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FoodBank>()
+                .Property(e => e.state)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FoodBank>()
+                .Property(e => e.zip)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Listing>()
                 .Property(e => e.product)
@@ -73,6 +118,50 @@ namespace NWHarvest.Web.Models
                 .HasPrecision(5, 2);
 
             modelBuilder.Entity<Listing>()
+                .Property(e => e.comments)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.latitude)
+                .HasPrecision(9, 6);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.longitude)
+                .HasPrecision(9, 6);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.address1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.address2)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.address3)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.address4)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.city)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.state)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.zip)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
                 .Property(e => e.comments)
                 .IsUnicode(false);
         }
