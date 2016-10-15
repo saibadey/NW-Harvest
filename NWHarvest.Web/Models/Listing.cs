@@ -31,6 +31,6 @@ namespace NWHarvest.Web.Models
 
         public string comments { get; set; }
 
-        public virtual Farmer Farmer { get; set; }
+        public virtual Grower Farmer { get; set; }
     }
 }
