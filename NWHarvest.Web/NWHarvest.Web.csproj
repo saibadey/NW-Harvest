@@ -180,6 +180,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FoodBanksController.cs" />
     <Compile Include="Controllers\GrowersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -262,6 +263,11 @@
     <Content Include="Views\Growers\Details.cshtml" />
     <Content Include="Views\Growers\Edit.cshtml" />
     <Content Include="Views\Growers\Index.cshtml" />
+    <Content Include="Views\FoodBanks\Create.cshtml" />
+    <Content Include="Views\FoodBanks\Delete.cshtml" />
+    <Content Include="Views\FoodBanks\Details.cshtml" />
+    <Content Include="Views\FoodBanks\Edit.cshtml" />
+    <Content Include="Views\FoodBanks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
