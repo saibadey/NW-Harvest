@@ -24,6 +24,7 @@ namespace NWHarvest.Web.Models
         public string phone { get; set; }
 
         [StringLength(100)]
+        [EmailAddress]
         public string email { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
