@@ -204,6 +204,10 @@
     <Compile Include="Migrations\201610151858478_AddPickupLocation.Designer.cs">
       <DependentUpon>201610151858478_AddPickupLocation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610152101309_AddAddress.cs" />
+    <Compile Include="Migrations\201610152101309_AddAddress.Designer.cs">
+      <DependentUpon>201610152101309_AddAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Grower.cs" />
@@ -304,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610151858478_AddPickupLocation.resx">
       <DependentUpon>201610151858478_AddPickupLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610152101309_AddAddress.resx">
+      <DependentUpon>201610152101309_AddAddress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
