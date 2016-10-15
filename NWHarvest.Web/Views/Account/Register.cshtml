@@ -9,6 +9,7 @@
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account</h4>
+    <p>Are you not a Grower? Foodbanks <a href="/Account/FoodBankRegister">click here</a> to register.</p>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -53,8 +54,23 @@
             @Html.PasswordFor(m => m.Address, new { @class = "form-control" })
         </div>
     </div>
-    <div class="notifications"><input type="checkbox" value="textNote" /> <p>Send me text notifications when my listings are claimed.</p></div>
-    <div class="notifications"><input type="checkbox" value="emailNote" /> <p>Send me email notifications when my listings are claimed.</p></div>
+    <p>Specify how you would like to receive notifications when listings are claimed</p>
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Text Notifications",
+        Value = "textNote"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "E-Mail Notification",
+        Value = "emailNote"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Both",
+        Value = "both"
+    });
     <div class="col-md-offset-2 col-md-10">
         <input type="submit" class="btn btn-default" value="Register" />
     </div>

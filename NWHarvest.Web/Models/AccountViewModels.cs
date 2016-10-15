@@ -98,6 +98,11 @@ namespace NWHarvest.Web.Models
         [Required]
         [Display(Name = "Address")]
         public string Address { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Notification")]
+        public string Notification { get; set; }
     }
 
     public class ResetPasswordViewModel

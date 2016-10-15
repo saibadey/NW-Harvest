@@ -5,10 +5,11 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("FoodBankRegister", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new FoodBank account</h4>
+    <p>Are you not a FoodBank? Growers <a href="/Account/Register">click here</a> to register.</p>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -53,17 +54,31 @@
             @Html.PasswordFor(m => m.Address, new { @class = "form-control" })
         </div>
     </div>
-    <p>Specify how you would like to receive notifications when local listings are posted</p>
-    <select label="Select Notification" id="notifyChoice">
-        <option disabled selected value="disabled"> -- select an option -- </option>
-        <option value="textNote">Text Notifications</option>
-        <option value="emailNote">Email Notifications</option>
-        <option value="both">Both</option>
-    </select>
+
+    <p>Specify how you would like to receive notifications when listings are posted</p>
+
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Text Notifications",
+        Value = "textNote"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "E-Mail Notification",
+        Value = "emailNote"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Both",
+        Value = "both"
+    });
+
+    @Html.DropDownListFor(m => m.Notification, listItems, "--Select Notification")
     <div class="col-md-offset-2 col-md-10">
         <input type="submit" class="btn btn-default" value="Register" />
     </div>
-}
+        }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

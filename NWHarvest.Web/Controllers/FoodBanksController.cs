@@ -20,6 +20,12 @@ namespace NWHarvest.Web.Controllers
             return View(db.FoodBanks.ToList());
         }
 
+        // GET: FoodBanks/DashboardView
+        public ActionResult DashboardView()
+        {
+            return View();
+        }
+
         // GET: FoodBanks/Details/5
         public ActionResult Details(int? id)
         {
