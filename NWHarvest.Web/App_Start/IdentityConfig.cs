@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
@@ -11,6 +12,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using NWHarvest.Web.Models;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace NWHarvest.Web
 {
@@ -19,7 +22,25 @@ namespace NWHarvest.Web
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return ConfigSendGrid(message);
+        }
+
+        private Task ConfigSendGrid(IdentityMessage message)
+        {
+            return Task.Run(() =>
+            {
+                var from = new Email("web@northwestharvest.org");
+                var subject = message.Subject;
+                var to = new Email(message.Destination);
+                var content = new Content("text/html", message.Body);
+                var mail = new Mail(from, subject, to, content);
+
+                var key = ConfigurationManager.AppSettings["sendgridkey"];
+                dynamic sendgrid = new SendGridAPIClient(key);
+
+                dynamic response = sendgrid.client.mail.send.post(requestBody: mail.Get());
+                return response;
+            });
         }
     }
 
