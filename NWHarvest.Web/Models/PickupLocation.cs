@@ -6,25 +6,19 @@ namespace NWHarvest.Web.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Grower")]
-    public partial class Grower
+    [Table("PickupLocation")]
+    public partial class PickupLocation
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Grower()
-        {
-            PickupLocations = new HashSet<PickupLocation>();
-        }
-
         public int id { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
         public string name { get; set; }
 
-        [StringLength(11)]
-        public string phone { get; set; }
+        public int? growerId { get; set; }
 
-        [StringLength(100)]
-        public string email { get; set; }
+        public decimal? latitude { get; set; }
+
+        public decimal? longitude { get; set; }
 
         [StringLength(200)]
         public string address1 { get; set; }
@@ -47,7 +41,8 @@ namespace NWHarvest.Web.Models
         [StringLength(9)]
         public string zip { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PickupLocation> PickupLocations { get; set; }
+        public string comments { get; set; }
+
+        public virtual Grower Grower { get; set; }
     }
 }

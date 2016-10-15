@@ -2,6 +2,7 @@ namespace NWHarvest.Web.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -11,24 +12,33 @@ namespace NWHarvest.Web.Models
     {
         public int id { get; set; }
 
+        [DisplayName("Grower")]
         public int listing_farmer { get; set; }
 
+        [DisplayName("Product")]
         public string product { get; set; }
 
+        [DisplayName("Quantity Available")]
         public decimal? qtyOffered { get; set; }
 
+        [DisplayName("Quantity Claimed")]
         public decimal? qtyClaimed { get; set; }
 
+        [DisplayName("Quantity Label")]
         [StringLength(100)]
         public string qtyLabel { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayName("Expiration Date")]
         public DateTime? expire_date { get; set; }
 
+        [DisplayName("Cost")]
         public decimal? cost { get; set; }
 
+        [DisplayName("Is Available")]
         public bool? available { get; set; }
 
+        [DisplayName("Comments")]
         public string comments { get; set; }
 
         public virtual Grower Farmer { get; set; }

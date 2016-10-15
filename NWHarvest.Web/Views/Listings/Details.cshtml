@@ -1,0 +1,90 @@
+﻿@model NWHarvest.Web.Models.Listing
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Listing</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Farmer.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Farmer.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qtyOffered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qtyOffered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qtyClaimed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qtyClaimed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qtyLabel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qtyLabel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expire_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expire_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.available)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.available)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comments)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

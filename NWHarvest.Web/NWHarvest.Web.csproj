@@ -192,6 +192,7 @@
     <Compile Include="Controllers\FoodBanksController.cs" />
     <Compile Include="Controllers\GrowersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ListingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -199,6 +200,14 @@
     <Compile Include="Migrations\201610151819559_RenameFarmerGrower.cs" />
     <Compile Include="Migrations\201610151819559_RenameFarmerGrower.Designer.cs">
       <DependentUpon>201610151819559_RenameFarmerGrower.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610151858478_AddPickupLocation.cs" />
+    <Compile Include="Migrations\201610151858478_AddPickupLocation.Designer.cs">
+      <DependentUpon>201610151858478_AddPickupLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610152101309_AddAddress.cs" />
+    <Compile Include="Migrations\201610152101309_AddAddress.Designer.cs">
+      <DependentUpon>201610152101309_AddAddress.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -208,6 +217,7 @@
     <Compile Include="Models\Listing.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NWHarvestEntities.cs" />
+    <Compile Include="Models\PickupLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -279,6 +289,12 @@
     <Content Include="Views\FoodBanks\Details.cshtml" />
     <Content Include="Views\FoodBanks\Edit.cshtml" />
     <Content Include="Views\FoodBanks\Index.cshtml" />
+    <Content Include="Views\Listings\Create.cshtml" />
+    <Content Include="Views\Listings\Delete.cshtml" />
+    <Content Include="Views\Listings\Details.cshtml" />
+    <Content Include="Views\Listings\Edit.cshtml" />
+    <Content Include="Views\Listings\Index.cshtml" />
+    <Content Include="Views\Listings\Claim.cshtml" />
     <Content Include="Views\Growers\DashboardView.cshtml" />
     <Content Include="Views\Account\FoodBankRegister.cshtml" />
   </ItemGroup>
@@ -297,6 +313,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610151819559_RenameFarmerGrower.resx">
       <DependentUpon>201610151819559_RenameFarmerGrower.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610151858478_AddPickupLocation.resx">
+      <DependentUpon>201610151858478_AddPickupLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610152101309_AddAddress.resx">
+      <DependentUpon>201610152101309_AddAddress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
