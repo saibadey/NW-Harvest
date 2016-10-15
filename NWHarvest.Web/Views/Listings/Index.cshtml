@@ -1,0 +1,93 @@
+﻿@model IEnumerable<NWHarvest.Web.Models.Listing>
+
+@{
+    ViewBag.Title = "Donation Listings";
+}
+
+<h2>Donation Listings</h2>
+
+<!--Only allow admins and growers to add listings-->
+@if (1 == 0)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Farmer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qtyOffered)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qtyClaimed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qtyLabel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expire_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.available)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comments)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Farmer.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qtyOffered)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qtyClaimed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qtyLabel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expire_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.available)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comments)
+        </td>
+        <td>
+            <!--Add check for if authorized to edit or delete (growers and admins only)-->
+            @if (1 == 0)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                <b>|</b>
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                <b>|</b>
+            }
+
+            @Html.ActionLink("Claim", "Claim", new { id = item.id })
+        </td>
+    </tr>
+}
+
+</table>

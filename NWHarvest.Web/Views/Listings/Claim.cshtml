@@ -1,0 +1,106 @@
+﻿@model NWHarvest.Web.Models.Listing
+
+@{
+    ViewBag.Title = "Claim";
+}
+
+<h2>Claim Listing</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Farmer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Farmer.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.product)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.product)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.qtyOffered)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.qtyOffered)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.qtyClaimed)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.qtyClaimed)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.qtyLabel)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.qtyLabel)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.expire_date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.expire_date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.cost)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cost)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.available)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.available)
+            </dd>
+        </dl>
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comments, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
