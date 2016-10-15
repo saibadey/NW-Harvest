@@ -79,7 +79,8 @@ namespace NWHarvest.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
+                    return RedirectToAction("DashboardView", "Growers");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -170,6 +171,14 @@ namespace NWHarvest.Web.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        //
+        // GET: /Account/FoodBankRegister
+        [AllowAnonymous]
+        public ActionResult FoodBankRegister()
+        {
+            return View();
         }
 
         //
