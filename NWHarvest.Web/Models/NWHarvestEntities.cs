@@ -75,6 +75,14 @@ namespace NWHarvest.Web.Models
             modelBuilder.Entity<Listing>()
                 .Property(e => e.comments)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PickupLocation>()
+                .Property(e => e.latlong)
+                .HasPrecision(9, 6);
         }
     }
 }

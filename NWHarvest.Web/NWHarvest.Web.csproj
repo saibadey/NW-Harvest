@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201610151819559_RenameFarmerGrower.Designer.cs">
       <DependentUpon>201610151819559_RenameFarmerGrower.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610151858478_AddPickupLocation.cs" />
+    <Compile Include="Migrations\201610151858478_AddPickupLocation.Designer.cs">
+      <DependentUpon>201610151858478_AddPickupLocation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Grower.cs" />
@@ -208,6 +212,7 @@
     <Compile Include="Models\Listing.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NWHarvestEntities.cs" />
+    <Compile Include="Models\PickupLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -296,6 +301,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610151819559_RenameFarmerGrower.resx">
       <DependentUpon>201610151819559_RenameFarmerGrower.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610151858478_AddPickupLocation.resx">
+      <DependentUpon>201610151858478_AddPickupLocation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
