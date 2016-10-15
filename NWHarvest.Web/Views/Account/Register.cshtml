@@ -3,12 +3,12 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+    <h4>Create a new account</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -55,6 +55,9 @@
     </div>
     <div class="notifications"><input type="checkbox" value="textNote" /> <p>Send me text notifications when my listings are claimed.</p></div>
     <div class="notifications"><input type="checkbox" value="emailNote" /> <p>Send me email notifications when my listings are claimed.</p></div>
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-default" value="Register" />
+    </div>
 }
 
 @section Scripts {
