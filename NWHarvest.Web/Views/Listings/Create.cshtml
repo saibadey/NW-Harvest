@@ -58,8 +58,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.expire_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.expire_date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.expire_date, "", new { @class = "text-danger" })
+                <div class="input-append date" id="expdate" data-date="12-1-2016" data-dateformat="dd-mm-yyyy">
+                    @Html.EditorFor(model => model.expire_date, new {htmlAttributes = new {@class = "form-control span2", size="16"}})
+                    <span class="add-on"><i class="glyphicon-calendar glyphicon"></i></span>
+                </div>
+                @Html.ValidationMessageFor(model => model.expire_date, "", new {@class = "text-danger"})
             </div>
         </div>
 
@@ -103,4 +106,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#expdate').datepicker();
+    </script>
 }
