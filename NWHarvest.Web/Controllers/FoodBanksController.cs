@@ -46,7 +46,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,phone,email,latlong")] FoodBank foodBank)
+        public ActionResult Create([Bind(Include = "id,name,phone,email,address1,address2,address3,address4,city,state,zip")] FoodBank foodBank)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,phone,email,latlong")] FoodBank foodBank)
+        public ActionResult Edit([Bind(Include = "id,name,phone,email,address1,address2,address3,address4,city,state,zip")] FoodBank foodBank)
         {
             if (ModelState.IsValid)
             {

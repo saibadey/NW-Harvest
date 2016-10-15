@@ -12,7 +12,7 @@ namespace NWHarvest.Web.Models
         {
         }
 
-        public virtual DbSet<Grower> Farmers { get; set; }
+        public virtual DbSet<Grower> Growers { get; set; }
         public virtual DbSet<FoodBank> FoodBanks { get; set; }
         public virtual DbSet<Listing> Listings { get; set; }
 
@@ -165,5 +165,7 @@ namespace NWHarvest.Web.Models
                 .Property(e => e.comments)
                 .IsUnicode(false);
         }
+
+        public System.Data.Entity.DbSet<NWHarvest.Web.Models.PickupLocation> PickupLocations { get; set; }
     }
 }

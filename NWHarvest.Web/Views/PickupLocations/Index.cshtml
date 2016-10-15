@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NWHarvest.Web.Models.Grower>
+﻿@model IEnumerable<NWHarvest.Web.Models.PickupLocation>
 
 @{
     ViewBag.Title = "Index";
@@ -12,13 +12,16 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Grower.name)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.phone)
+            @Html.DisplayNameFor(model => model.latitude)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.DisplayNameFor(model => model.longitude)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.address1)
@@ -41,19 +44,25 @@
         <th>
             @Html.DisplayNameFor(model => model.zip)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comments)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Grower.name)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.phone)
+            @Html.DisplayFor(modelItem => item.latitude)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.email)
+            @Html.DisplayFor(modelItem => item.longitude)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.address1)
@@ -75,6 +84,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comments)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
