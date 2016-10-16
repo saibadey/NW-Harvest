@@ -62,3 +62,7 @@ textarea {
 div.body-content div.text-center a.btn {
     background-color: #548ac8;
 }
+
+#listingDeets dd{
+    margin-bottom: 10px;
+}
