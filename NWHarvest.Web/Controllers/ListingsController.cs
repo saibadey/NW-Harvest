@@ -82,7 +82,8 @@ namespace NWHarvest.Web.Controllers
             var user = registeredUserService.GetRegisteredUser(this.User);
 
             var repo = new ListingsRepository();
-            ViewBag.PickupLocations = new SelectList(repo.GetAllPickupLocations(user.GrowerId), "id", "name");
+            var pickupLocationsList = repo.GetAllPickupLocations(user.GrowerId);
+            ViewBag.PickupLocations = new SelectList(pickupLocationsList, "id", "name");
             return View();
         }
 

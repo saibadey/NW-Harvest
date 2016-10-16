@@ -60,7 +60,8 @@ namespace NWHarvest.Web.Models
             var query = (from pl in db.PickupLocations
                          where (pl.Grower.Id == growerId)
                          select pl);
-            return query.ToList();
+            var queryList = query.ToList();
+            return queryList;
         }
     }
 }
