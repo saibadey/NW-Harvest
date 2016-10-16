@@ -19,6 +19,7 @@ namespace NWHarvest.Web.Controllers
         public IEnumerable<PickupLocation> PickupLocations { get; set; }
     }
 
+    [Authorize]
     public class ListingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -84,6 +85,7 @@ namespace NWHarvest.Web.Controllers
             var repo = new ListingsRepository();
             var pickupLocationsList = repo.GetAllPickupLocations(user.GrowerId);
             ViewBag.PickupLocations = new SelectList(pickupLocationsList, "id", "name");
+            //ViewBag.growerName = "the grower";
             return View();
         }
 
@@ -92,7 +94,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,available,comments")] Listing listing)
+        public ActionResult Create([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,comments")] Listing listing)
         {
             var service = new RegisteredUserService();
             var user = service.GetRegisteredUser(this.User);
@@ -102,6 +104,7 @@ namespace NWHarvest.Web.Controllers
                             select b).FirstOrDefault();
 
             listing.Grower = grower;
+            listing.available = true;
 
             if (ModelState.IsValid)
             {
@@ -166,7 +169,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,available,comments")] Listing listing)
+        public ActionResult Edit([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,comments")] Listing listing)
         {
 
 

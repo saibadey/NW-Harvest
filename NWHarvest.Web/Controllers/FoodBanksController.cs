@@ -10,6 +10,7 @@ using NWHarvest.Web.Models;
 
 namespace NWHarvest.Web.Controllers
 {
+    [Authorize]
     public class FoodBanksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
