@@ -138,6 +138,14 @@ namespace NWHarvest.Web.Controllers
         }
 
         //
+        // GET: /Account/RegisterRouteView
+        [AllowAnonymous]
+        public ActionResult RegisterRouteView()
+        {
+            return View();
+        }
+
+        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()

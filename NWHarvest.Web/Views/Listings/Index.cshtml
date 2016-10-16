@@ -1,93 +1,187 @@
-﻿@model IEnumerable<NWHarvest.Web.Models.Listing>
+﻿@model NWHarvest.Web.Controllers.ViewLists
 
 @{
-    ViewBag.Title = "Donation Listings";
+    ViewBag.TopTitle = "Available Produce";
+
+    if (Model.registeredUser.Role == "admin")
+    {
+        ViewBag.BottomTitle = "No Longer Available and Expired Produce";
+    }
+
+    if (Model.registeredUser.Role == "grower")
+    {
+        ViewBag.BottomTitle = "My Claimed and Expired Produce";
+    }
+
+    if (Model.registeredUser.Role == "foodBank")
+    {
+        ViewBag.BottomTitle = "My Claimed Produce";
+    }
 }
 
-<h2>Donation Listings</h2>
+<h1>Welcome @Model.registeredUser.UserName!</h1>
+
+<h2>@ViewBag.TopTitle</h2>
 
 <!--Only allow admins and growers to add listings-->
-@if (1 == 0)
+@if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
 {
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
 }
 
+@{ var ListingForTitles = Model.TopList.FirstOrDefault(); }
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Farmer)
+            @Html.DisplayNameFor(model => ListingForTitles.listing_farmer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.product)
+            @Html.DisplayNameFor(model => ListingForTitles.product)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.qtyOffered)
+            @Html.DisplayNameFor(model => ListingForTitles.qtyOffered)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.qtyClaimed)
+            @Html.DisplayNameFor(model => ListingForTitles.qtyClaimed)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.qtyLabel)
+            @Html.DisplayNameFor(model => ListingForTitles.qtyLabel)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.expire_date)
+            @Html.DisplayNameFor(model => ListingForTitles.expire_date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cost)
+            @Html.DisplayNameFor(model => ListingForTitles.cost)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.available)
+            @Html.DisplayNameFor(model => ListingForTitles.available)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.comments)
+            @Html.DisplayNameFor(model => ListingForTitles.comments)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Farmer.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.product)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.qtyOffered)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.qtyClaimed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.qtyLabel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.expire_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.available)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.comments)
-        </td>
-        <td>
-            <!--Add check for if authorized to edit or delete (growers and admins only)-->
-            @if (1 == 0)
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.id })
-                <b>|</b>
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                <b>|</b>
-            }
+    @foreach (var item in Model.TopList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Farmer.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qtyOffered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qtyClaimed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qtyLabel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.expire_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comments)
+            </td>
+            <td>
+                <!--Add check for if authorized to edit or delete (growers and admins only)-->
+                @if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                    <b>|</b>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                }
+                
+                <!--Only food banks can claim food.-->
+                @if (Model.registeredUser.Role == "foodBank")
+                {
+                    <b>|</b>
+                    @Html.ActionLink("Claim", "Claim", new { id = item.id })
+                }
+                
+            </td>
+        </tr>
+    }
+</table>
 
-            @Html.ActionLink("Claim", "Claim", new { id = item.id })
-        </td>
+<h2>@ViewBag.BottomTitle</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.listing_farmer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.qtyOffered)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.qtyClaimed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.qtyLabel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.expire_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.available)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => ListingForTitles.comments)
+        </th>
+        <th></th>
     </tr>
-}
+
+    @foreach (var item in Model.BottomList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Farmer.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qtyOffered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qtyClaimed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qtyLabel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.expire_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comments)
+            </td>
+        </tr>
+    }
+
+
 
 </table>

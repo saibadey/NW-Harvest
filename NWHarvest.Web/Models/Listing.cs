@@ -11,10 +11,7 @@ namespace NWHarvest.Web.Models
     public partial class Listing
     {
         public int id { get; set; }
-
-        [DisplayName("Grower")]
-        public int listing_farmer { get; set; }
-
+        
         [DisplayName("Product")]
         public string product { get; set; }
 
@@ -38,9 +35,14 @@ namespace NWHarvest.Web.Models
         [DisplayName("Is Available")]
         public bool? available { get; set; }
 
-        [DisplayName("Comments")]
+        [DisplayName("Schedule Pickup")]
         public string comments { get; set; }
 
-        public virtual Grower Farmer { get; set; }
+
+        [DisplayName("Grower")]
+        public virtual Grower Grower { get; set; }
+
+        [DisplayName("FoodBank")]
+        public virtual FoodBank FoodBank { get; set; }
     }
 }
