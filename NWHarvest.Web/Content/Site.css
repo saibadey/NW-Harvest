@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    /*padding-top: 50px;*/
     padding-bottom: 20px;
 }
 
@@ -36,4 +36,16 @@ textarea {
     width: 100%;
     max-width: 280px;
     margin-bottom: 100px;
+}
+
+.navbar-collapse {
+    background-image:url('Banner.jpg');
+    min-height:261px;
+}
+
+.navbar-brand {
+    display:none;
+}
+
+.navbar-nav{
 }
