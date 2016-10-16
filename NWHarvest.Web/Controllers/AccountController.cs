@@ -181,7 +181,9 @@ namespace NWHarvest.Web.Controllers
                             address2 = model.StreetAddress2,
                             city = model.City,
                             state = model.State,
-                            zip = model.ZipCode });
+                            zip = model.ZipCode,
+                            NotificationPreference = model.Notification
+                        });
                     }
                     else if (model.UserType == "IsGrower")
                     {
@@ -194,7 +196,8 @@ namespace NWHarvest.Web.Controllers
                             address2 = model.StreetAddress2,
                             city = model.City,
                             state = model.State,
-                            zip = model.ZipCode
+                            zip = model.ZipCode,
+                            NotificationPreference = model.Notification
                         });
                     }
                     else //admin

@@ -1,7 +1,10 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using NWHarvest.Web.Models;
 
 namespace NWHarvest.Web.Controllers
@@ -126,6 +129,20 @@ namespace NWHarvest.Web.Controllers
             return View(listing);
         }
 
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: Listings/Claim/5
         public ActionResult Claim(int? id)
         {
@@ -180,6 +197,32 @@ namespace NWHarvest.Web.Controllers
                 var foodBank = (from b in db.FoodBanks
                                 where b.Id == user.FoodBankId
                                 select b).FirstOrDefault();
+
+                var growerUser = UserManager.FindById(listing.Grower.UserId);
+                var grower = db.Growers.First(x => x.UserId == growerUser.Id);
+                var message = new IdentityMessage
+                {
+                    Destination = growerUser.PhoneNumber,
+                    Body = $"Your listing of {listing.product} has been claimed by {foodBank.name}",
+                    Subject = $"NW Harvest listing of {listing.product} has been claimed by {foodBank.name}"
+                };
+
+                var sendSMS = !string.IsNullOrWhiteSpace(growerUser.PhoneNumber) &&
+                              growerUser.PhoneNumberConfirmed &&
+                              (grower.NotificationPreference.ToLower().Contains("both") ||
+                               grower.NotificationPreference.ToLower().Contains("text"));
+
+                var sendEmail = growerUser.EmailConfirmed && (grower.NotificationPreference.ToLower().Contains("both") ||
+                              grower.NotificationPreference.ToLower().Contains("email"));
+
+                if (sendSMS)
+                {
+                    UserManager.SmsService.SendAsync(message).Wait();
+                }
+                if (sendEmail)
+                {
+                    UserManager.EmailService.SendAsync(message);
+                }
 
                 listing.FoodBank = foodBank;
 

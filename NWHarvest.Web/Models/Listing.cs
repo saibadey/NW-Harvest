@@ -21,7 +21,7 @@ namespace NWHarvest.Web.Models
         [DisplayName("Quantity Claimed")]
         public decimal? qtyClaimed { get; set; }
 
-        [DisplayName("Quantity Label")]
+        [DisplayName("Unit of Measure")]
         [StringLength(100)]
         public string qtyLabel { get; set; }
 
