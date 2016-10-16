@@ -18,6 +18,9 @@ namespace NWHarvest.Web.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+
         public AccountController()
         {
         }
@@ -166,6 +169,39 @@ namespace NWHarvest.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    
+                    if (model.UserType == "IsFoodBank")
+                    {
+                        db.FoodBanks.Add(new FoodBank {
+                            UserId = user.Id,
+                            name = model.Name,
+                            email = model.Email,
+                            phone = model.PhoneNumber,
+                            address1 = model.StreetAddress1,
+                            address2 = model.StreetAddress2,
+                            city = model.City,
+                            state = model.State,
+                            zip = model.ZipCode });
+                    }
+                    else if (model.UserType == "IsGrower")
+                    {
+                        db.Growers.Add(new Grower {
+                            UserId = user.Id,
+                            name = model.Name,
+                            email = model.Email,
+                            phone = model.PhoneNumber,
+                            address1 = model.StreetAddress1,
+                            address2 = model.StreetAddress2,
+                            city = model.City,
+                            state = model.State,
+                            zip = model.ZipCode
+                        });
+                    }
+                    else //admin
+                    {
+                    }
+                    db.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -183,43 +219,43 @@ namespace NWHarvest.Web.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/FoodBankRegister
-        [AllowAnonymous]
-        public ActionResult FoodBankRegister()
-        {
-            return View();
-        }
+        ////
+        //// GET: /Account/FoodBankRegister
+        //[AllowAnonymous]
+        //public ActionResult FoodBankRegister()
+        //{
+        //    return View();
+        //}
 
-        //
-        // POST: /Account/FoodBankRegister
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> FoodBankRegister(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+        ////
+        //// POST: /Account/FoodBankRegister
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> FoodBankRegister(RegisterViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+        //        var result = await UserManager.CreateAsync(user, model.Password);
+        //        if (result.Succeeded)
+        //        {
+        //            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+        //            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+        //            // Send an email with this link
+        //            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+        //            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        //            await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Listings");
-                }
-                AddErrors(result);
-            }
+        //            return RedirectToAction("Index", "Listings");
+        //        }
+        //        AddErrors(result);
+        //    }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+        //    // If we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
 
         //
         // GET: /Account/ConfirmEmail

@@ -9,9 +9,24 @@
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account</h4>
-    <p>Are you not a Grower? Food Banks <a href="/Account/FoodBankRegister">click here</a> to register.</p>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+    <p>Please select whether you are a food bank or a grower</p>
+    List<SelectListItem> userTypeListItems = new List<SelectListItem>();
+    userTypeListItems.Add(new SelectListItem
+    {
+        Text = "Grower",
+        Value = "isGrower"
+    });
+    userTypeListItems.Add(new SelectListItem
+    {
+        Text = "Food Bank",
+        Value = "isFoodBank"
+    });
+    <div class="userType">
+        @Html.DropDownListFor(m => m.UserType, userTypeListItems, "--Select user type")
+    </div>
+    <hr/>
     <div class="form-group">
         @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -107,7 +122,6 @@
         Text = "Both",
         Value = "both"
     });
-
     @Html.DropDownListFor(m => m.Notification, listItems, "--Select Notification")
     <div class="col-md-offset-2 col-md-10">
         <input type="submit" class="btn btn-default" value="Register" />
