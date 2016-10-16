@@ -3,33 +3,30 @@
 }
 
 <div class="jumbotron">
-    <h1>NW Harvest</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Growing Connections</h1>
+    <p class="lead">Northwest Harvest is Washington's own statewide hunger relief agency. Our mission is leading the fight for hungry people statewide to have access to nutritious food while respecting their dignity and promoting good health. Our vision is ending hunger in Washington.</p>
+    <p><a href="http://www.northwestharvest.org/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
 <div class="row">
     
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Growers</h2>
+        <p>A listing of food providers.</p>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a>
+            @Html.ActionLink("Growers »", "Index", "Growers", new {area=""}, new {@class = "btn btn-default"})
         </p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a>
+        <h2>Food Banks</h2>
+        <p>Place to distribute food to those in need.</p>
+            @Html.ActionLink("Food Banks »", "Index", "FoodBanks", new { area = "" }, new {@class="btn btn-default"})
+        <p>
         </p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a>
-        </p>
+        <h2>Available Produce</h2>
+        <p>Current listings</p>
+        <p>@Html.ActionLink("Listings »", "Index", "Listings", new { area = "" }, new {@class="btn btn-default"})</p>
     </div>
 </div>

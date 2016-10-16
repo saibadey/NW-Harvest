@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<NWHarvest.Web.Models.PickupLocation>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pickup Locations";
 }
 
-<h2>Index</h2>
+<h2>Pickup Locations</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,12 +16,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.longitude)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.address1)
