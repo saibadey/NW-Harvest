@@ -6,7 +6,7 @@ namespace NWHarvest.Web.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
     }
 
@@ -42,14 +42,14 @@ namespace NWHarvest.Web.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -70,13 +70,13 @@ namespace NWHarvest.Web.Models
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Confirm Email")]
-        [Compare("Email", ErrorMessage = "The Email and confirmation Email do not match.")]
+        [Display(Name = "Confirm E-mail")]
+        [Compare("Email", ErrorMessage = "The E-mail and confirmation E-mail do not match.")]
         public string ConfirmEmail { get; set; }
 
         [Required]
@@ -86,7 +86,7 @@ namespace NWHarvest.Web.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
@@ -96,8 +96,33 @@ namespace NWHarvest.Web.Models
         public string PhoneNumber { get; set; }
 
         [Required]
-        [Display(Name = "Address")]
-        public string Address { get; set; }
+        [Display(Name = "Street Address")]
+        public string StreetAddress1 { get; set; }
+
+        [Required]
+        [Display(Name = "cont.")]
+        public string StreetAddress2 { get; set; }
+
+        //[Required]
+        //[Display(Name = "Address")]
+        //public string Address { get; set; }
+
+        //[Required]
+        //[Display(Name = "Address")]
+        //public string Address { get; set; }
+
+        [Required]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [StringLength(2, ErrorMessage = "The {0} must be {2} characters long.", MinimumLength = 2)]
+        [Display(Name = "State")]
+        public string State { get; set; }
+
+        [Required]
+        [Display(Name = "Zip-Code")]
+        public int ZipCode { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -109,7 +134,7 @@ namespace NWHarvest.Web.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
         [Required]
@@ -119,7 +144,7 @@ namespace NWHarvest.Web.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
@@ -130,7 +155,7 @@ namespace NWHarvest.Web.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
     }
 }

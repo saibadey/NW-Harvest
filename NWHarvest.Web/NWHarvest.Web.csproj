@@ -310,6 +310,7 @@
     <Content Include="Views\PickupLocations\Edit.cshtml" />
     <Content Include="Views\PickupLocations\Index.cshtml" />
     <Content Include="Views\Account\FoodBankRegister.cshtml" />
+    <Content Include="Views\Account\RegisterRouteView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
