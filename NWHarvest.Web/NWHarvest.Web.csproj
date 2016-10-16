@@ -203,6 +203,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Listing.cs" />
     <Compile Include="Models\ListingsRepository.cs" />
+    <Compile Include="Models\ListingViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PickupLocation.cs" />
     <Compile Include="Models\RegisteredUserService.cs" />
