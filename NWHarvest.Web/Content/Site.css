@@ -58,3 +58,7 @@ textarea {
     font-weight: bold;
     font-size: 26px;
 }
+
+div.body-content div.text-center a.btn {
+    background-color: #548ac8;
+}
