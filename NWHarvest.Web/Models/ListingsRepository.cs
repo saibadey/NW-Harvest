@@ -64,5 +64,14 @@ namespace NWHarvest.Web.Models
                     orderby b.id descending
                     select b).ToList();
         }
+
+        public IEnumerable<PickupLocation> GetAllPickupLocations(int growerId)
+        {
+            var query = (from pl in db.PickupLocations
+                         where (pl.Grower.Id == growerId)
+                         select pl);
+            var queryList = query.ToList();
+            return queryList;
+        }
     }
 }
