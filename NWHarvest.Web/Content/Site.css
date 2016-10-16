@@ -58,3 +58,7 @@ textarea {
     font-weight: bold;
     font-size: 26px;
 }
+
+#listingDeets dd{
+    margin-bottom: 10px;
+}
