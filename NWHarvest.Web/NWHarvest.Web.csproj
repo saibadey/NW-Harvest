@@ -182,6 +182,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PickupLocationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -302,6 +303,12 @@
     <Content Include="Views\Listings\Edit.cshtml" />
     <Content Include="Views\Listings\Index.cshtml" />
     <Content Include="Views\Listings\Claim.cshtml" />
+    <Content Include="Views\Growers\DashboardView.cshtml" />
+    <Content Include="Views\PickupLocations\Create.cshtml" />
+    <Content Include="Views\PickupLocations\Delete.cshtml" />
+    <Content Include="Views\PickupLocations\Details.cshtml" />
+    <Content Include="Views\PickupLocations\Edit.cshtml" />
+    <Content Include="Views\PickupLocations\Index.cshtml" />
     <Content Include="Views\Account\FoodBankRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>

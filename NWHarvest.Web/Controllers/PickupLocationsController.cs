@@ -10,107 +10,112 @@ using NWHarvest.Web.Models;
 
 namespace NWHarvest.Web.Controllers
 {
-    public class GrowersController : Controller
+    public class PickupLocationsController : Controller
     {
         private NWHarvestEntities db = new NWHarvestEntities();
 
-        // GET: Growers
+        // GET: PickupLocations
         public ActionResult Index()
         {
-            return View(db.Growers.ToList());
+            var pickupLocations = db.PickupLocations.Include(p => p.Grower);
+            return View(pickupLocations.ToList());
         }
 
-        // GET: Growers/Details/5
+        // GET: PickupLocations/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grower grower = db.Growers.Find(id);
-            if (grower == null)
+            PickupLocation pickupLocation = db.PickupLocations.Find(id);
+            if (pickupLocation == null)
             {
                 return HttpNotFound();
             }
-            return View(grower);
+            return View(pickupLocation);
         }
 
-        // GET: Growers/Create
+        // GET: PickupLocations/Create
         public ActionResult Create()
         {
+            ViewBag.growerId = new SelectList(db.Growers, "id", "name");
             return View();
         }
 
-        // POST: Growers/Create
+        // POST: PickupLocations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,phone,email,address1,address2,address3,address4,city,state,zip")] Grower grower)
+        public ActionResult Create([Bind(Include = "id,name,growerId,latitude,longitude,address1,address2,address3,address4,city,state,zip,comments")] PickupLocation pickupLocation)
         {
             if (ModelState.IsValid)
             {
-                db.Growers.Add(grower);
+                db.PickupLocations.Add(pickupLocation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(grower);
+            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.growerId);
+            return View(pickupLocation);
         }
 
-        // GET: Growers/Edit/5
+        // GET: PickupLocations/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grower grower = db.Growers.Find(id);
-            if (grower == null)
+            PickupLocation pickupLocation = db.PickupLocations.Find(id);
+            if (pickupLocation == null)
             {
                 return HttpNotFound();
             }
-            return View(grower);
+            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.growerId);
+            return View(pickupLocation);
         }
 
-        // POST: Growers/Edit/5
+        // POST: PickupLocations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,phone,email,address1,address2,address3,address4,city,state,zip")] Grower grower)
+        public ActionResult Edit([Bind(Include = "id,name,growerId,latitude,longitude,address1,address2,address3,address4,city,state,zip,comments")] PickupLocation pickupLocation)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(grower).State = EntityState.Modified;
+                db.Entry(pickupLocation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(grower);
+            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.growerId);
+            return View(pickupLocation);
         }
 
-        // GET: Growers/Delete/5
+        // GET: PickupLocations/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grower grower = db.Growers.Find(id);
-            if (grower == null)
+            PickupLocation pickupLocation = db.PickupLocations.Find(id);
+            if (pickupLocation == null)
             {
                 return HttpNotFound();
             }
-            return View(grower);
+            return View(pickupLocation);
         }
 
-        // POST: Growers/Delete/5
+        // POST: PickupLocations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Grower grower = db.Growers.Find(id);
-            db.Growers.Remove(grower);
+            PickupLocation pickupLocation = db.PickupLocations.Find(id);
+            db.PickupLocations.Remove(pickupLocation);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

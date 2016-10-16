@@ -17,6 +17,7 @@ namespace NWHarvest.Web.Models
 
         public int id { get; set; }
 
+        [Display(Name = "Grower")]
         [StringLength(100)]
         public string name { get; set; }
 
