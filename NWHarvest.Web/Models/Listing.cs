@@ -16,9 +16,11 @@ namespace NWHarvest.Web.Models
         public string product { get; set; }
 
         [DisplayName("Quantity Available")]
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = true)]
         public decimal? qtyOffered { get; set; }
 
         [DisplayName("Quantity Claimed")]
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = true)]
         public decimal? qtyClaimed { get; set; }
 
         [DisplayName("Unit of Measure")]
@@ -27,16 +29,18 @@ namespace NWHarvest.Web.Models
 
         [Column(TypeName ="date")]
         [DisplayName("Harvested Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? harvested_date { get; set; }
 
         [Column(TypeName = "date")]
         [DisplayName("Expiration Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? expire_date { get; set; }
 
         [DisplayName("Cost")]
         public decimal? cost { get; set; }
 
-        [DisplayName("Is Available")]
+        [DisplayName("Claimed")]
         public bool? available { get; set; }
 
         [DisplayName("Schedule Pickup")]
