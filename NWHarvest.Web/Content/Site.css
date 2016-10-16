@@ -30,3 +30,15 @@ textarea {
     justify-content: space-between;
     max-width: 50%;
 }
+
+.navbar-collapse {
+    background-image:url('Banner.jpg');
+    min-height:261px;
+}
+
+.navbar-brand {
+    display:none;
+}
+
+.navbar-nav{
+}
