@@ -24,9 +24,5 @@ textarea {
 }
 
 .userType {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: space-between;
-    max-width: 50%;
+    margin-bottom: 30px;
 }

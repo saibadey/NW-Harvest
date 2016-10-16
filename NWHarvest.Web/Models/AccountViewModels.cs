@@ -65,6 +65,11 @@ namespace NWHarvest.Web.Models
     public class RegisterViewModel
     {
         [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "User Type")]
+        public string UserType { get; set; }
+
+        [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
@@ -122,7 +127,7 @@ namespace NWHarvest.Web.Models
 
         [Required]
         [Display(Name = "Zip-Code")]
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
