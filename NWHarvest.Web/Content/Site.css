@@ -36,6 +36,8 @@ textarea {
     width: 100%;
     max-width: 280px;
     margin-bottom: 100px;
+    background-color: #548AC8;
+    color: white;
 }
 
 .navbar-collapse {
