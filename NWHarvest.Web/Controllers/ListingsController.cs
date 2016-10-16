@@ -1,7 +1,10 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using NWHarvest.Web.Models;
 
 namespace NWHarvest.Web.Controllers
@@ -119,6 +122,20 @@ namespace NWHarvest.Web.Controllers
             return View(listing);
         }
 
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: Listings/Claim/5
         public ActionResult Claim(int? id)
         {
@@ -173,6 +190,17 @@ namespace NWHarvest.Web.Controllers
                 var foodBank = (from b in db.FoodBanks
                                 where b.Id == user.FoodBankId
                                 select b).FirstOrDefault();
+
+                var grower = UserManager.FindById(listing.Grower.UserId);
+                if (grower != null && grower.PhoneNumberConfirmed)
+                {
+                    UserManager.SmsService.SendAsync(new IdentityMessage
+                    {
+                        Destination = grower.PhoneNumber,
+                        Body = $"Your listing of {listing.product} has been claimed by {foodBank.name}",
+                        Subject = "Listing Claimed"
+                    }).Wait();
+                }
 
                 listing.FoodBank = foodBank;
 
