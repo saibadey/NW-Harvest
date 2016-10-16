@@ -67,8 +67,10 @@
                 <!--Add check for if authorized to edit or delete (growers and admins only)-->
                 @if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
                 {
+                    @*
                     <b>|</b>
                     @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                    *@
                     <b> | </b>
                     @Html.ActionLink("Delete", "Delete", new { id = item.id })
                 }

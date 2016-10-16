@@ -76,17 +76,16 @@ namespace NWHarvest.Web.Controllers
         // GET: Listings/Create
         public ActionResult Create()
         {
-            ViewBag.grower = new SelectList(db.Growers, "id", "name");
-            ViewBag.growerName = "the grower";
-
             var registeredUserService = new RegisteredUserService();
             var user = registeredUserService.GetRegisteredUser(this.User);
 
-            var repo = new ListingsRepository();
-            var pickupLocationsList = repo.GetAllPickupLocations(user.GrowerId);
-            ViewBag.PickupLocations = new SelectList(pickupLocationsList, "id", "name");
-            //ViewBag.growerName = "the grower";
-            return View();
+
+            ListingViewModel listingViewModel = new ListingViewModel();
+            listingViewModel.Grower = db.Growers.Where(g => g.Id == user.GrowerId).FirstOrDefault();
+            ViewBag.grower = new SelectList(db.Growers, "id", "name");
+            ViewBag.growerName = "the grower";
+            
+            return View(listingViewModel);
         }
 
         // POST: Listings/Create
@@ -94,21 +93,40 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,comments")] Listing listing)
+        public ActionResult Create(ListingViewModel listing)
         {
+            
             var service = new RegisteredUserService();
             var user = service.GetRegisteredUser(this.User);
 
             var grower = (from b in db.Growers
                             where b.Id == user.GrowerId
                             select b).FirstOrDefault();
+            var pickupLocation = (from b in db.PickupLocations
+                                  where b.id.ToString() == listing.SavedLocationId
+                                  select b).FirstOrDefault();
 
             listing.Grower = grower;
             listing.available = true;
+            listing.PickupLocation = pickupLocation;
+            
+            var saveListing = new Listing();
+            saveListing.product = listing.product;
+            saveListing.qtyClaimed = listing.qtyClaimed;
+            saveListing.qtyOffered = listing.qtyOffered;
+            saveListing.qtyLabel = listing.qtyLabel;
+            saveListing.harvested_date = listing.harvested_date;
+            saveListing.expire_date = listing.expire_date;
+            saveListing.cost = listing.cost;
+            saveListing.available = listing.available;
+            saveListing.comments = listing.comments;
+            saveListing.Grower = listing.Grower;
+            saveListing.FoodBank = listing.FoodBank;
+
 
             if (ModelState.IsValid)
             {
-                db.Listings.Add(listing);
+                db.Listings.Add(saveListing);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
