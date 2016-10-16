@@ -72,7 +72,7 @@ namespace NWHarvest.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.grower = new SelectList(db.Growers, "id", "name");
-            ViewBag.growerName = "the grower";
+            //ViewBag.growerName = "the grower";
             return View();
         }
 
@@ -81,7 +81,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,available,comments")] Listing listing)
+        public ActionResult Create([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,comments")] Listing listing)
         {
             var service = new RegisteredUserService();
             var user = service.GetRegisteredUser(this.User);
@@ -91,6 +91,7 @@ namespace NWHarvest.Web.Controllers
                             select b).FirstOrDefault();
 
             listing.Grower = grower;
+            listing.available = true;
 
             if (ModelState.IsValid)
             {
@@ -141,7 +142,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,available,comments")] Listing listing)
+        public ActionResult Edit([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,comments")] Listing listing)
         {
 
 
