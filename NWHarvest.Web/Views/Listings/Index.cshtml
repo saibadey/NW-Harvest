@@ -20,8 +20,6 @@
     }
 }
 
-<h1>Welcome @Model.registeredUser.UserName!</h1>
-
 <h2>@ViewBag.TopTitle</h2>
 
 <!--Only allow admins and growers to add listings-->
@@ -97,20 +95,24 @@
                 @Html.DisplayFor(modelItem => item.comments)
             </td>
             <td>
+                @Html.ActionLink("Details", "Details", new { id = item.id })
+
                 <!--Add check for if authorized to edit or delete (growers and admins only)-->
                 @if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
                 {
+                    <b>|</b>
                     @Html.ActionLink("Edit", "Edit", new { id = item.id })
                     <b>|</b>
                     @Html.ActionLink("Delete", "Delete", new { id = item.id })
                 }
-                
+
                 <!--Only food banks can claim food.-->
                 @if (Model.registeredUser.Role == "foodBank")
                 {
+                    <b>|</b>
                     @Html.ActionLink("Claim", "Claim", new { id = item.id })
                 }
-                
+
             </td>
         </tr>
     }
