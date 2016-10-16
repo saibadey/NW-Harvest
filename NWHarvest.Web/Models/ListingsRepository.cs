@@ -54,5 +54,13 @@ namespace NWHarvest.Web.Models
                     & b.FoodBank.Id == foodBankId)
                     select b).ToList();
         }
+
+        public IEnumerable<PickupLocation> GetAllPickupLocations(int growerId)
+        {
+            var query = (from pl in db.PickupLocations
+                         where (pl.Grower.Id == growerId)
+                         select pl);
+            return query.ToList();
+        }
     }
 }

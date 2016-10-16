@@ -42,6 +42,8 @@ namespace NWHarvest.Web.Models
         [DisplayName("Schedule Pickup")]
         public string comments { get; set; }
 
+        [DisplayName("Location")]
+        public string location { get; set; }
 
         [DisplayName("Grower")]
         public virtual Grower Grower { get; set; }
