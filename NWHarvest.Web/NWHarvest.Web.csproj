@@ -316,17 +316,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610151819559_RenameFarmerGrower.resx">
-      <DependentUpon>201610151819559_RenameFarmerGrower.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610151858478_AddPickupLocation.resx">
-      <DependentUpon>201610151858478_AddPickupLocation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610152101309_AddAddress.resx">
-      <DependentUpon>201610152101309_AddAddress.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
