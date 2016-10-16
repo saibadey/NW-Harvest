@@ -298,7 +298,6 @@
     <Content Include="Views\Listings\Edit.cshtml" />
     <Content Include="Views\Listings\Index.cshtml" />
     <Content Include="Views\Listings\Claim.cshtml" />
-    <Content Include="Views\Growers\DashboardView.cshtml" />
     <Content Include="Views\Listings\Grower.cshtml" />
     <Content Include="Views\PickupLocations\Create.cshtml" />
     <Content Include="Views\PickupLocations\Delete.cshtml" />
