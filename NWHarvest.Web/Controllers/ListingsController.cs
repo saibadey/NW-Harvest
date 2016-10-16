@@ -1,24 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using NWHarvest.Web.Models;
 
 namespace NWHarvest.Web.Controllers
 {
+    using System.Collections.Generic;
+    
+    public class ViewLists
+    {
+        public RegisteredUser registeredUser { get; set; } 
+        public IEnumerable<Listing> TopList { get; set; }
+        public IEnumerable<Listing> BottomList { get; set; }
+    }
+
+    public class RegisteredUser
+    {
+        public int GrowerId { get; set; }
+        public int FoodBankId { get; set; }
+        public string Role { get; set; }
+        public string UserName { get; set; }
+    }
+
     public class ListingsController : Controller
     {
+        private const int DAY_LIMIT_FOR_GROWERS = 31;
+        private const int DAY_LIMIT_FOR_FOOD_BANKS = 31;
+        private const int DAY_LIMIT_FOR_ADMINISTRATORS = 180;
+
         private NWHarvestEntities db = new NWHarvestEntities();
 
         // GET: Listings
         public ActionResult Index()
         {
-            var listings = db.Listings.Include(l => l.Farmer);
-            return View(listings.ToList());
+            var dummyUser = new RegisteredUser();
+
+            dummyUser.FoodBankId = 1;
+            dummyUser.GrowerId = 2;
+            dummyUser.Role = "grower";
+
+            if (dummyUser.Role == "admin")
+            {
+                dummyUser.UserName = "Mr./Mrs. admin";
+            }
+
+            if (dummyUser.Role == "grower")
+            {
+                dummyUser.UserName = "Mr./Mrs. Grower" + dummyUser.GrowerId;
+            }
+
+            if (dummyUser.Role == "foodBank")
+            {
+                dummyUser.UserName = "Mr./Mrs. Food Bank" + dummyUser.FoodBankId;
+            }
+
+            var repo = new ListingsRepository();
+            var viewLists = new ViewLists();
+            viewLists.registeredUser = dummyUser;
+
+            if (dummyUser.Role == "admin")
+            {
+                viewLists.TopList = repo.GetAllAvailable();
+                viewLists.BottomList = repo.GetAllUnavailableExpired(DAY_LIMIT_FOR_ADMINISTRATORS);
+            }
+
+            else if (dummyUser.Role == "grower")
+            {
+                viewLists.TopList = repo.GetAvailableByGrower(dummyUser.GrowerId);
+                viewLists.BottomList = repo.GetUnavailableExpired(dummyUser.GrowerId, DAY_LIMIT_FOR_GROWERS);
+            }
+
+            else if (dummyUser.Role == "foodBank")
+            {
+                viewLists.TopList = repo.GetAllAvailable();
+                viewLists.BottomList = repo.GetClaimedByFoodBank(dummyUser.FoodBankId, DAY_LIMIT_FOR_FOOD_BANKS);
+            }
+
+            return View(viewLists);
         }
 
         // GET: Listings/Details/5
@@ -124,6 +183,7 @@ namespace NWHarvest.Web.Controllers
                 listing = db.Listings.FirstOrDefault(p => p.id == listing.id);
 
                 listing.comments = theComments;
+                listing.available = false;
 
                 db.Entry(listing).State = EntityState.Modified;
                 db.SaveChanges();
