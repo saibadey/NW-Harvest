@@ -13,6 +13,8 @@ namespace NWHarvest.Web.Controllers
         public RegisteredUser registeredUser { get; set; } 
         public IEnumerable<Listing> TopList { get; set; }
         public IEnumerable<Listing> BottomList { get; set; }
+
+
     }
 
     public class ListingsController : Controller

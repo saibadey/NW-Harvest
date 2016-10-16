@@ -17,6 +17,9 @@ namespace NWHarvest.Web.Controllers
         // GET: PickupLocations
         public ActionResult Index()
         {
+            var registeredUserService = new RegisteredUserService();
+            var user = registeredUserService.GetRegisteredUser(this.User);
+
             var pickupLocations = db.PickupLocations.Include(p => p.Grower);
             return View(pickupLocations.ToList());
         }
@@ -48,7 +51,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,growerId,latitude,longitude,address1,address2,address3,address4,city,state,zip,comments")] PickupLocation pickupLocation)
+        public ActionResult Create([Bind(Include = "id,name,growerId,address1,address2,address3,address4,city,state,zip,comments")] PickupLocation pickupLocation)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +85,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,growerId,latitude,longitude,address1,address2,address3,address4,city,state,zip,comments")] PickupLocation pickupLocation)
+        public ActionResult Edit([Bind(Include = "id,name,growerId,address1,address2,address3,address4,city,state,zip,comments")] PickupLocation pickupLocation)
         {
             if (ModelState.IsValid)
             {
