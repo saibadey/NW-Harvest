@@ -98,7 +98,7 @@ namespace NWHarvest.Web.Controllers
         // GET: Listings/Create
         public ActionResult Create()
         {
-            ViewBag.listing_farmer = new SelectList(db.Farmers, "id", "name");
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name");
             return View();
         }
 
@@ -116,7 +116,7 @@ namespace NWHarvest.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.listing_farmer = new SelectList(db.Farmers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
             return View(listing);
         }
 
@@ -132,7 +132,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.listing_farmer = new SelectList(db.Farmers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
             return View(listing);
         }
 
@@ -148,7 +148,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.listing_farmer = new SelectList(db.Farmers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
             return View(listing);
         }
 
@@ -166,7 +166,7 @@ namespace NWHarvest.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.listing_farmer = new SelectList(db.Farmers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
             return View(listing);
         }
 
@@ -189,7 +189,7 @@ namespace NWHarvest.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.listing_farmer = new SelectList(db.Farmers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
             return View(listing);
         }
 

@@ -1,6 +1,6 @@
 ﻿@model NWHarvest.Web.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Register Grower";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -9,6 +9,7 @@
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account</h4>
+    <p>Are you not a Grower? Food Banks <a href="/Account/FoodBankRegister">click here</a> to register.</p>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -44,17 +45,70 @@
     <div class="form-group">
         @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.PhoneNumber, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.StreetAddress1, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.Address, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.StreetAddress1, new { @class = "form-control" })
         </div>
     </div>
-    <div class="notifications"><input type="checkbox" value="textNote" /> <p>Send me text notifications when my listings are claimed.</p></div>
-    <div class="notifications"><input type="checkbox" value="emailNote" /> <p>Send me email notifications when my listings are claimed.</p></div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.StreetAddress2, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.StreetAddress2, new { @class = "form-control" })
+        </div>
+    </div>
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.StreetAddress3, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.StreetAddress3, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.StreetAddress4, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.StreetAddress4, new { @class = "form-control" })
+        </div>
+    </div>*@
+    <div class="form-group">
+        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ZipCode, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
+        </div>
+    </div>
+    <p>Specify how you would like to receive notifications when listings are claimed</p>
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Text Notifications",
+        Value = "textNote"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "E-Mail Notification",
+        Value = "emailNote"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Both",
+        Value = "both"
+    });
+
+    @Html.DropDownListFor(m => m.Notification, listItems, "--Select Notification")
     <div class="col-md-offset-2 col-md-10">
         <input type="submit" class="btn btn-default" value="Register" />
     </div>

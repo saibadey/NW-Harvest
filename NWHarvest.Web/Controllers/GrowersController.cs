@@ -17,13 +17,7 @@ namespace NWHarvest.Web.Controllers
         // GET: Growers
         public ActionResult Index()
         {
-            return View(db.Farmers.ToList());
-        }
-
-        // GET: Growers/DashboardView
-        public ActionResult DashboardView()
-        {
-            return View();
+            return View(db.Growers.ToList());
         }
 
         // GET: Growers/Details/5
@@ -33,7 +27,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grower grower = db.Farmers.Find(id);
+            Grower grower = db.Growers.Find(id);
             if (grower == null)
             {
                 return HttpNotFound();
@@ -52,11 +46,11 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,phone,email")] Grower grower)
+        public ActionResult Create([Bind(Include = "id,name,phone,email,address1,address2,address3,address4,city,state,zip")] Grower grower)
         {
             if (ModelState.IsValid)
             {
-                db.Farmers.Add(grower);
+                db.Growers.Add(grower);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -71,7 +65,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grower grower = db.Farmers.Find(id);
+            Grower grower = db.Growers.Find(id);
             if (grower == null)
             {
                 return HttpNotFound();
@@ -84,7 +78,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,phone,email")] Grower grower)
+        public ActionResult Edit([Bind(Include = "id,name,phone,email,address1,address2,address3,address4,city,state,zip")] Grower grower)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +96,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grower grower = db.Farmers.Find(id);
+            Grower grower = db.Growers.Find(id);
             if (grower == null)
             {
                 return HttpNotFound();
@@ -115,8 +109,8 @@ namespace NWHarvest.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Grower grower = db.Farmers.Find(id);
-            db.Farmers.Remove(grower);
+            Grower grower = db.Growers.Find(id);
+            db.Growers.Remove(grower);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
