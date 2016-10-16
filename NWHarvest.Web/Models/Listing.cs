@@ -12,15 +12,18 @@ namespace NWHarvest.Web.Models
     {
         public int id { get; set; }
         
+        [Required]
         [DisplayName("Product")]
         public string product { get; set; }
 
+        [Required]
         [DisplayName("Quantity Available")]
         public decimal? qtyOffered { get; set; }
 
         [DisplayName("Quantity Claimed")]
         public decimal? qtyClaimed { get; set; }
 
+        [Required]
         [DisplayName("Unit of Measure")]
         [StringLength(100)]
         public string qtyLabel { get; set; }
@@ -29,17 +32,19 @@ namespace NWHarvest.Web.Models
         [DisplayName("Harvested Date")]
         public DateTime? harvested_date { get; set; }
 
+        [Required]
         [Column(TypeName = "date")]
         [DisplayName("Expiration Date")]
         public DateTime? expire_date { get; set; }
 
-        [DisplayName("Cost")]
+        [Required]
+        [DisplayName("Cost/Unit")]
         public decimal? cost { get; set; }
 
         [DisplayName("Is Available")]
         public bool? available { get; set; }
 
-        [DisplayName("Schedule Pickup")]
+        [DisplayName("Notes")]
         public string comments { get; set; }
 
 
