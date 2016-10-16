@@ -201,6 +201,7 @@
     <Compile Include="Models\FoodBank.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Listing.cs" />
+    <Compile Include="Models\ListingsRepository.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NWHarvestEntities.cs" />
     <Compile Include="Models\PickupLocation.cs" />
@@ -299,12 +300,14 @@
     <Content Include="Views\Listings\Index.cshtml" />
     <Content Include="Views\Listings\Claim.cshtml" />
     <Content Include="Views\Growers\DashboardView.cshtml" />
+    <Content Include="Views\Listings\Grower.cshtml" />
     <Content Include="Views\PickupLocations\Create.cshtml" />
     <Content Include="Views\PickupLocations\Delete.cshtml" />
     <Content Include="Views\PickupLocations\Details.cshtml" />
     <Content Include="Views\PickupLocations\Edit.cshtml" />
     <Content Include="Views\PickupLocations\Index.cshtml" />
     <Content Include="Views\Account\FoodBankRegister.cshtml" />
+    <Content Include="Views\Account\RegisterRouteView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -314,9 +317,6 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

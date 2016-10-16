@@ -35,7 +35,7 @@ namespace NWHarvest.Web.Models
         [DisplayName("Is Available")]
         public bool? available { get; set; }
 
-        [DisplayName("Comments")]
+        [DisplayName("Schedule Pickup")]
         public string comments { get; set; }
 
 

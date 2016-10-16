@@ -23,7 +23,10 @@ textarea {
     max-width: 280px;
 }
 
-.notifications {
-    
+.userType {
     display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+    max-width: 50%;
 }
