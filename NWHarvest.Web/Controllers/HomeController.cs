@@ -10,6 +10,7 @@ namespace NWHarvest.Web.Controllers
     {
         public ActionResult Index()
         {
+            var test = this.User;
             return View();
         }
     }
