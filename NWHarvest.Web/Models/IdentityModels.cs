@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -20,8 +21,7 @@ namespace NWHarvest.Web.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public ApplicationDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +29,10 @@ namespace NWHarvest.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public virtual DbSet<Grower> Growers { get; set; }
+        public virtual DbSet<FoodBank> FoodBanks { get; set; }
+        public virtual DbSet<Listing> Listings { get; set; }
+        public virtual DbSet<PickupLocation> PickupLocations { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace NWHarvest.Web.Controllers
 {
     public class PickupLocationsController : Controller
     {
-        private NWHarvestEntities db = new NWHarvestEntities();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: PickupLocations
         public ActionResult Index()

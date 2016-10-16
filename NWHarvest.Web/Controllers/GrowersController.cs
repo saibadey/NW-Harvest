@@ -12,7 +12,7 @@ namespace NWHarvest.Web.Controllers
 {
     public class GrowersController : Controller
     {
-        private NWHarvestEntities db = new NWHarvestEntities();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Growers
         public ActionResult Index()

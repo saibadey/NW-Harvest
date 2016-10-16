@@ -1,3 +1,5 @@
+using System.Data;
+
 namespace NWHarvest.Web.Models
 {
     using System;
@@ -15,7 +17,9 @@ namespace NWHarvest.Web.Models
             PickupLocations = new HashSet<PickupLocation>();
         }
 
-        public int id { get; set; }
+        public int Id { get; set; }
+
+        public string UserId { get; set; }
 
         [Display(Name = "Grower")]
         [StringLength(100)]

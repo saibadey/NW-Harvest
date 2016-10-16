@@ -1,15 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
+using System.Data.Entity.Spatial;
+
 namespace NWHarvest.Web.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("FoodBank")]
     public partial class FoodBank
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+
+        public string UserId { get; set; }
 
         [StringLength(100)]
         public string name { get; set; }
