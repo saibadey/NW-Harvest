@@ -16,8 +16,7 @@ namespace NWHarvest.Web.Controllers
         public RegisteredUser registeredUser { get; set; } 
         public IEnumerable<Listing> TopList { get; set; }
         public IEnumerable<Listing> BottomList { get; set; }
-
-
+        public IEnumerable<PickupLocation> PickupLocations { get; set; }
     }
 
     [Authorize]
@@ -78,6 +77,14 @@ namespace NWHarvest.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.grower = new SelectList(db.Growers, "id", "name");
+            ViewBag.growerName = "the grower";
+
+            var registeredUserService = new RegisteredUserService();
+            var user = registeredUserService.GetRegisteredUser(this.User);
+
+            var repo = new ListingsRepository();
+            var pickupLocationsList = repo.GetAllPickupLocations(user.GrowerId);
+            ViewBag.PickupLocations = new SelectList(pickupLocationsList, "id", "name");
             //ViewBag.growerName = "the grower";
             return View();
         }
