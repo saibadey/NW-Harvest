@@ -49,3 +49,10 @@ textarea {
 
 .navbar-nav{
 }
+
+.body-content h2, body .body-content #registerTitle{
+    color: #F4AA00;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 26px;
+}
