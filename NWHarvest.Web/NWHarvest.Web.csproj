@@ -216,11 +216,6 @@
     <Compile Include="Models\NWHarvestEntities.cs" />
     <Compile Include="Models\PickupLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ASPSMSX2\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,15 +259,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <None Include="Service References\ASPSMSX2\configuration91.svcinfo" />
-    <None Include="Service References\ASPSMSX2\configuration.svcinfo" />
-    <Content Include="Service References\ASPSMSX2\NWHarvest.Web.ASPSMSX2.vouchers.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Service References\ASPSMSX2\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -327,7 +313,6 @@
     <Content Include="Views\Listings\Claim.cshtml" />
     <Content Include="Views\Growers\DashboardView.cshtml" />
     <Content Include="Views\Account\FoodBankRegister.cshtml" />
-    <None Include="Service References\ASPSMSX2\aspsmsx2.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -352,9 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ASPSMSX2\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
