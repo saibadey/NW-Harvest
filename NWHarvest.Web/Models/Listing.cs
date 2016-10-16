@@ -25,6 +25,10 @@ namespace NWHarvest.Web.Models
         [StringLength(100)]
         public string qtyLabel { get; set; }
 
+        [Column(TypeName ="date")]
+        [DisplayName("Harvested Date")]
+        public DateTime? harvested_date { get; set; }
+
         [Column(TypeName = "date")]
         [DisplayName("Expiration Date")]
         public DateTime? expire_date { get; set; }
@@ -44,5 +48,8 @@ namespace NWHarvest.Web.Models
 
         [DisplayName("FoodBank")]
         public virtual FoodBank FoodBank { get; set; }
+
+        [DisplayName("Pickup Location")]
+        public virtual PickupLocation PickupLocation { get; set; }
     }
 }

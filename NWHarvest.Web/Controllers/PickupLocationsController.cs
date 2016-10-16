@@ -57,7 +57,7 @@ namespace NWHarvest.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.growerId);
+            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.Grower.Id);
             return View(pickupLocation);
         }
 
@@ -73,7 +73,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.growerId);
+            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.Grower.Id);
             return View(pickupLocation);
         }
 
@@ -90,7 +90,7 @@ namespace NWHarvest.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.growerId);
+            ViewBag.growerId = new SelectList(db.Growers, "id", "name", pickupLocation.Grower.Id);
             return View(pickupLocation);
         }
 
