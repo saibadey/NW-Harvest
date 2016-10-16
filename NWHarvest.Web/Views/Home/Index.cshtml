@@ -2,31 +2,28 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Growing Connections</h1>
-    <p class="lead">Northwest Harvest is Washington's own statewide hunger relief agency. Our mission is leading the fight for hungry people statewide to have access to nutritious food while respecting their dignity and promoting good health. Our vision is ending hunger in Washington.</p>
-    <p><a href="http://www.northwestharvest.org/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
 <div class="row">
-    
-    <div class="col-md-4">
-        <h2>Growers</h2>
-        <p>A listing of food providers.</p>
+    <div class="col-md-3 text-center">
+        <br/>
+        <br/>
+        <br/>
         <p>
-            @Html.ActionLink("Growers »", "Index", "Growers", new {area=""}, new {@class = "btn btn-default"})
+            @Html.ActionLink("Grower Login »", "Login", "Account", new {area = ""}, new {@class = "btn btn-primary", style = "width: 220px"})
+        </p>
+        <p>
+            @Html.ActionLink("Food Bank Login »", "Login", "Account", new {area = ""}, new {@class = "btn btn-primary", style = "width: 220px"})
+        </p>
+        <p>
+            @Html.ActionLink("Create Account »", "Register", "Account", new {area = ""}, new {@class = "btn btn-primary", style = "width: 220px"})
         </p>
     </div>
-    <div class="col-md-4">
-        <h2>Food Banks</h2>
-        <p>Place to distribute food to those in need.</p>
-            @Html.ActionLink("Food Banks »", "Index", "FoodBanks", new { area = "" }, new {@class="btn btn-default"})
-        <p>
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>Available Produce</h2>
-        <p>Current listings</p>
-        <p>@Html.ActionLink("Listings »", "Index", "Listings", new { area = "" }, new {@class="btn btn-default"})</p>
+    <div class="col-md-9">
+        <h2>Growing Connections</h2>
+        <p>Growing Connections is a Farm-to-Food Bank (F2FB) initiative meant to connect growers with food banks. Use this tool to facilitate local connections for produce! A grower can create a listing when they have produce available for donation or for sale. A food bank volunteer or staff person can see listings in their area and respond. After claiming a listing, location and pickup details will be communicated automatically. Then, the volunteer/staff picks up the produce and delivers it to their food bank!</p>
+        <p>Who can be a grower? Anyone growing produce. This can be an at-home gardener, a community garden, or a farmer. Whether it’s extra produce or your burning desire to start a formal giving program with your local food banks, this site will help you grow your connections!</p>
+
+        <p>As a food bank, you can sign up your staff or volunteers so that they can monitor and search for when there might be produce available in your area. The listings will show you whether that grower is donating or selling produce and how much it is.</p>
+
+        <p>We hope this site helps to increase fresh produce available to food bank clients as well as more diverse produce choices for food bank clients; brings support to local agriculture; and builds a stronger community.</p>
     </div>
 </div>

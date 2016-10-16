@@ -197,12 +197,12 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\FullListing.cs" />
     <Compile Include="Models\Grower.cs" />
     <Compile Include="Models\FoodBank.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Listing.cs" />
     <Compile Include="Models\ListingsRepository.cs" />
+    <Compile Include="Models\ListingViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PickupLocation.cs" />
     <Compile Include="Models\RegisteredUserService.cs" />

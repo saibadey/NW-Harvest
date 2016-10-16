@@ -4,26 +4,26 @@
     if (Model.registeredUser.Role == "admin")
     {
         ViewBag.TopTitle = "All Available Produce";
-        ViewBag.BottomTitle = "No Longer Available and Expired Produce";
+        ViewBag.BottomTitle = "No Longer Available and Expired Produce for last 180 Days";
     }
 
     if (Model.registeredUser.Role == "grower")
     {
         ViewBag.TopTitle = "My Available Produce";
-        ViewBag.BottomTitle = "My Claimed and Expired Produce";
+        ViewBag.BottomTitle = "My Claimed and Expired Produce for Last 30 Days";
     }
 
     if (Model.registeredUser.Role == "foodBank")
     {
         ViewBag.TopTitle = "Available Produce";
-        ViewBag.BottomTitle = "My Claimed Produce";
+        ViewBag.BottomTitle = "My Claimed Produce for Last 30 Days";
     }
 }
 
 <h2>@ViewBag.TopTitle</h2>
 
 <!--Only allow admins and growers to add listings-->
-@if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
+@if (Model.registeredUser.Role == "grower")
 {
     <p>
         @Html.ActionLink("Create New", "Create")
@@ -39,9 +39,9 @@
             <th>@Html.DisplayNameFor(model => ListingForTitles.product)</th>
             <th>@Html.DisplayNameFor(model => ListingForTitles.qtyOffered)</th>
             <th>@Html.DisplayNameFor(model => ListingForTitles.qtyLabel)</th>
+            <th>@Html.DisplayNameFor(model => ListingForTitles.harvested_date)</th>
             <th>@Html.DisplayNameFor(model => ListingForTitles.expire_date)</th>
             <th>@Html.DisplayNameFor(model => ListingForTitles.cost)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.available)</th>
             <th>@Html.DisplayNameFor(model => ListingForTitles.comments)</th>
             <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.city)</th>
             <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.zip)</th>
@@ -54,9 +54,9 @@
             <td>@Html.DisplayFor(modelItem => item.product)</td>
             <td>@Html.DisplayFor(modelItem => item.qtyOffered)</td>
             <td>@Html.DisplayFor(modelItem => item.qtyLabel)</td>
+            <td>@Html.DisplayFor(modelItem => item.harvested_date)</td>
             <td>@Html.DisplayFor(modelItem => item.expire_date)</td>
             <td>@Html.DisplayFor(modelItem => item.cost)</td>
-            <td>@((bool)item.available ? "Yes" : "No")</td>
             <td>@Html.DisplayFor(modelItem => item.comments)</td>
             <td>@Html.DisplayFor(modelItem => item.PickupLocation.city)</td>
             <td>@Html.DisplayFor(modelItem => item.PickupLocation.zip)</td>
@@ -67,8 +67,10 @@
                 <!--Add check for if authorized to edit or delete (growers and admins only)-->
                 @if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
                 {
+                    @*
                     <b>|</b>
                     @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                    *@
                     <b> | </b>
                     @Html.ActionLink("Delete", "Delete", new { id = item.id })
                 }
@@ -91,6 +93,7 @@
         <th>@Html.DisplayNameFor(model => ListingForTitles.product)</th>
         <th>@Html.DisplayNameFor(model => ListingForTitles.qtyOffered)</th>
         <th>@Html.DisplayNameFor(model => ListingForTitles.qtyLabel)</th>
+        <th>@Html.DisplayNameFor(model => ListingForTitles.harvested_date)</th>
         <th>@Html.DisplayNameFor(model => ListingForTitles.expire_date)</th>
         <th>@Html.DisplayNameFor(model => ListingForTitles.cost)</th>
         <th>@Html.DisplayNameFor(model => ListingForTitles.available)</th>
@@ -108,9 +111,10 @@
             <td>@Html.DisplayFor(modelItem => item.product)</td>
             <td>@Html.DisplayFor(modelItem => item.qtyOffered)</td>
             <td>@Html.DisplayFor(modelItem => item.qtyLabel)</td>
+            <td>@Html.DisplayFor(modelItem => item.harvested_date)</td>
             <td>@Html.DisplayFor(modelItem => item.expire_date)</td>
             <td>@Html.DisplayFor(modelItem => item.cost)</td>
-            <td>@((bool)item.available ? "Yes" : "No")</td>
+            <td>@((bool)item.available ? "No" : "Yes")</td>
             <td>@Html.DisplayFor(modelItem => item.comments)</td>
             <td>@Html.DisplayFor(modelItem => item.PickupLocation.city)</td>
             <td>@Html.DisplayFor(modelItem => item.PickupLocation.zip)</td>

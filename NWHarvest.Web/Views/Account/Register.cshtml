@@ -1,14 +1,13 @@
 ﻿@model NWHarvest.Web.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Register for Growing Connections";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 id="registerTitle">@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     List<SelectListItem> userTypeListItems = new List<SelectListItem>();
@@ -24,7 +23,7 @@
     });
     <div class="userType">
         <p>Please select whether you are a food bank or a grower</p>
-        @Html.DropDownListFor(m => m.UserType, userTypeListItems, " Select User Type ")
+        @Html.DropDownListFor(m => m.UserType, userTypeListItems, " ")
     </div>
     <hr/>
     <div class="form-group">
@@ -124,7 +123,7 @@
     <hr />
     <div class="notifType">
         <p>Specify how you would like to receive notifications when listings are claimed</p>
-        @Html.DropDownListFor(m => m.Notification, listItems, " Select Notification ")
+        @Html.DropDownListFor(m => m.Notification, listItems, " ")
     </div>
     <div class="col-md-offset-2 col-md-10">
         <input type="submit" class="btn btn-default customRegister" value="Register" />

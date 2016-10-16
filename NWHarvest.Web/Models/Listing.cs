@@ -12,36 +12,47 @@ namespace NWHarvest.Web.Models
     {
         public int id { get; set; }
         
+        [Required]
         [DisplayName("Product")]
         public string product { get; set; }
 
+        [Required]
         [DisplayName("Quantity Available")]
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = true)]
         public decimal? qtyOffered { get; set; }
 
         [DisplayName("Quantity Claimed")]
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = true)]
         public decimal? qtyClaimed { get; set; }
 
+        [Required]
         [DisplayName("Unit of Measure")]
         [StringLength(100)]
         public string qtyLabel { get; set; }
 
         [Column(TypeName ="date")]
         [DisplayName("Harvested Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? harvested_date { get; set; }
 
+        [Required]
         [Column(TypeName = "date")]
         [DisplayName("Expiration Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? expire_date { get; set; }
 
-        [DisplayName("Cost")]
+        [Required]
+        [DisplayName("Cost/Unit")]
         public decimal? cost { get; set; }
 
-        [DisplayName("Is Available")]
+        [DisplayName("Claimed")]
         public bool? available { get; set; }
 
-        [DisplayName("Schedule Pickup")]
+        [DisplayName("Notes")]
         public string comments { get; set; }
 
+        [DisplayName("Location")]
+        public string location { get; set; }
 
         [DisplayName("Grower")]
         public virtual Grower Grower { get; set; }
