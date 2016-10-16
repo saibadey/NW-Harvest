@@ -20,12 +20,6 @@ namespace NWHarvest.Web.Controllers
             return View(db.Farmers.ToList());
         }
 
-        // GET: Growers/DashboardView
-        public ActionResult DashboardView()
-        {
-            return View();
-        }
-
         // GET: Growers/Details/5
         public ActionResult Details(int? id)
         {

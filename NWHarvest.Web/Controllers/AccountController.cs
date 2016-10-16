@@ -79,8 +79,10 @@ namespace NWHarvest.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    //return RedirectToLocal(returnUrl);
-                    return RedirectToAction("DashboardView", "Growers");
+                    if (true)
+                    {
+                        return RedirectToAction("Index", "Listings");
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
