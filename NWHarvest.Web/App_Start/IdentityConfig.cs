@@ -14,6 +14,7 @@ using Microsoft.Owin.Security;
 using NWHarvest.Web.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using Twilio;
 
 namespace NWHarvest.Web
 {
@@ -49,6 +50,14 @@ namespace NWHarvest.Web
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your SMS service here to send a text message.
+            var id = ConfigurationManager.AppSettings["SMSAccountIdentification"];
+            var password = ConfigurationManager.AppSettings["SMSAccountPassword"];
+            var from = ConfigurationManager.AppSettings["SMSAccountFrom"];
+
+            var twilio = new TwilioRestClient(id, password);
+
+            var result = twilio.SendMessage(from, message.Destination, message.Body);
+
             return Task.FromResult(0);
         }
     }
@@ -74,11 +83,11 @@ namespace NWHarvest.Web
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequiredLength = 4,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults
