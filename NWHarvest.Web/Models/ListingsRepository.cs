@@ -47,11 +47,9 @@ namespace NWHarvest.Web.Models
 
         public IEnumerable<Listing> GetClaimedByFoodBank(int foodBankId, int daysSinceCreation)
         {
-            var oldestAcceptableDate = DateTime.Now.AddDays(-daysSinceCreation);
-            var currentDate = DateTime.Now;
+            var oldestAcceptableDate = DateTime.Now.AddDays(-daysSinceCreation);    
             return (from b in db.Listings
-                    where ((b.available == false
-                    || b.expire_date < currentDate)
+                    where (b.available == false
                     & b.expire_date > oldestAcceptableDate
                     & b.FoodBank.Id == foodBankId)
                     select b).ToList();

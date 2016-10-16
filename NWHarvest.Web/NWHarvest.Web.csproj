@@ -204,6 +204,7 @@
     <Compile Include="Models\ListingsRepository.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PickupLocation.cs" />
+    <Compile Include="Models\RegisteredUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

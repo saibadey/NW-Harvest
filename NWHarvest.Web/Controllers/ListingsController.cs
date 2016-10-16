@@ -15,14 +15,6 @@ namespace NWHarvest.Web.Controllers
         public IEnumerable<Listing> BottomList { get; set; }
     }
 
-    public class RegisteredUser
-    {
-        public int GrowerId { get; set; }
-        public int FoodBankId { get; set; }
-        public string Role { get; set; }
-        public string UserName { get; set; }
-    }
-
     public class ListingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -33,47 +25,29 @@ namespace NWHarvest.Web.Controllers
         // GET: Listings
         public ActionResult Index()
         {
-            var dummyUser = new RegisteredUser();
-
-            dummyUser.FoodBankId = 1;
-            dummyUser.GrowerId = 2;
-            dummyUser.Role = "grower";
-
-            if (dummyUser.Role == "admin")
-            {
-                dummyUser.UserName = "Mr./Mrs. admin";
-            }
-
-            if (dummyUser.Role == "grower")
-            {
-                dummyUser.UserName = "Mr./Mrs. Grower" + dummyUser.GrowerId;
-            }
-
-            if (dummyUser.Role == "foodBank")
-            {
-                dummyUser.UserName = "Mr./Mrs. Food Bank" + dummyUser.FoodBankId;
-            }
+            var registeredUserService = new RegisteredUserService();
+            var user = registeredUserService.GetRegisteredUser(this.User);
 
             var repo = new ListingsRepository();
             var viewLists = new ViewLists();
-            viewLists.registeredUser = dummyUser;
+            viewLists.registeredUser = user;
 
-            if (dummyUser.Role == "admin")
+            if (user.Role == "admin")
             {
                 viewLists.TopList = repo.GetAllAvailable();
                 viewLists.BottomList = repo.GetAllUnavailableExpired(DAY_LIMIT_FOR_ADMINISTRATORS);
             }
 
-            else if (dummyUser.Role == "grower")
+            else if (user.Role == "grower")
             {
-                viewLists.TopList = repo.GetAvailableByGrower(dummyUser.GrowerId);
-                viewLists.BottomList = repo.GetUnavailableExpired(dummyUser.GrowerId, DAY_LIMIT_FOR_GROWERS);
+                viewLists.TopList = repo.GetAvailableByGrower(user.GrowerId);
+                viewLists.BottomList = repo.GetUnavailableExpired(user.GrowerId, DAY_LIMIT_FOR_GROWERS);
             }
 
-            else if (dummyUser.Role == "foodBank")
+            else if (user.Role == "foodBank")
             {
                 viewLists.TopList = repo.GetAllAvailable();
-                viewLists.BottomList = repo.GetClaimedByFoodBank(dummyUser.FoodBankId, DAY_LIMIT_FOR_FOOD_BANKS);
+                viewLists.BottomList = repo.GetClaimedByFoodBank(user.FoodBankId, DAY_LIMIT_FOR_FOOD_BANKS);
             }
 
             return View(viewLists);
@@ -98,6 +72,7 @@ namespace NWHarvest.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.grower = new SelectList(db.Growers, "id", "name");
+            ViewBag.growerName = "the grower";
             return View();
         }
 
@@ -106,16 +81,25 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,listing_farmer,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,available,comments")] Listing listing)
+        public ActionResult Create([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,available,comments")] Listing listing)
         {
+            var service = new RegisteredUserService();
+            var user = service.GetRegisteredUser(this.User);
+
+            var grower = (from b in db.Growers
+                            where b.Id == user.GrowerId
+                            select b).FirstOrDefault();
+
+            listing.Grower = grower;
+
             if (ModelState.IsValid)
             {
                 db.Listings.Add(listing);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.grower = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
+            
+            //ViewBag.grower = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
             return View(listing);
         }
 
@@ -147,7 +131,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.grower = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
+            //ViewBag.grower = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
             return View(listing);
         }
 
@@ -157,8 +141,10 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,listing_farmer,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,available,comments")] Listing listing)
+        public ActionResult Edit([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,available,comments")] Listing listing)
         {
+
+
             if (ModelState.IsValid)
             {
                 db.Entry(listing).State = EntityState.Modified;
@@ -180,6 +166,15 @@ namespace NWHarvest.Web.Controllers
             {
                 var theComments = listing.comments;
                 listing = db.Listings.FirstOrDefault(p => p.id == listing.id);
+
+                var service = new RegisteredUserService();
+                var user = service.GetRegisteredUser(this.User);
+
+                var foodBank = (from b in db.FoodBanks
+                                where b.Id == user.FoodBankId
+                                select b).FirstOrDefault();
+
+                listing.FoodBank = foodBank;
 
                 listing.comments = theComments;
                 listing.available = false;
