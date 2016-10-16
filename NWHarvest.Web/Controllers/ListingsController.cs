@@ -18,6 +18,7 @@ namespace NWHarvest.Web.Controllers
         public IEnumerable<Listing> BottomList { get; set; }
     }
 
+    [Authorize]
     public class ListingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

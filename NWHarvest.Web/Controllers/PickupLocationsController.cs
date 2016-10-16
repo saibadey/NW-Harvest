@@ -10,6 +10,7 @@ using NWHarvest.Web.Models;
 
 namespace NWHarvest.Web.Controllers
 {
+    [Authorize]
     public class PickupLocationsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
