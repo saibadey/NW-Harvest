@@ -191,18 +191,28 @@ namespace NWHarvest.Web.Controllers
                                 where b.Id == user.FoodBankId
                                 select b).FirstOrDefault();
 
-                var grower = UserManager.FindById(listing.Grower.UserId);
+                var growerUser = UserManager.FindById(listing.Grower.UserId);
+                var grower = db.Growers.First(x => x.UserId == growerUser.Id);
                 var message = new IdentityMessage
                 {
-                    Destination = grower.PhoneNumber,
+                    Destination = growerUser.PhoneNumber,
                     Body = $"Your listing of {listing.product} has been claimed by {foodBank.name}",
                     Subject = $"NW Harvest listing of {listing.product} has been claimed by {foodBank.name}"
                 };
-                if (!string.IsNullOrWhiteSpace(grower.PhoneNumber) && grower.PhoneNumberConfirmed)
+
+                var sendSMS = !string.IsNullOrWhiteSpace(growerUser.PhoneNumber) &&
+                              growerUser.PhoneNumberConfirmed &&
+                              (grower.NotificationPreference.ToLower().Contains("both") ||
+                               grower.NotificationPreference.ToLower().Contains("text"));
+
+                var sendEmail = growerUser.EmailConfirmed && (grower.NotificationPreference.ToLower().Contains("both") ||
+                              grower.NotificationPreference.ToLower().Contains("email"));
+
+                if (sendSMS)
                 {
                     UserManager.SmsService.SendAsync(message).Wait();
                 }
-                if (grower.EmailConfirmed)
+                if (sendEmail)
                 {
                     UserManager.EmailService.SendAsync(message);
                 }
