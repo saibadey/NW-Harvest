@@ -58,16 +58,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.available, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.available)
-                    @Html.ValidationMessageFor(model => model.available, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="userType">
             <p>Please select listing location</p>
