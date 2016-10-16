@@ -23,6 +23,17 @@ textarea {
     max-width: 280px;
 }
 
-.userType {
+.userType, .notifType {
     margin-bottom: 30px;
+    display: flex;
+}
+
+.userType select, .notifType select {
+    margin-left: 15px;
+}
+
+.customRegister {
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 100px;
 }

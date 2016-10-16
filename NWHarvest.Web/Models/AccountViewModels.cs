@@ -105,7 +105,7 @@ namespace NWHarvest.Web.Models
         public string StreetAddress1 { get; set; }
 
         [Required]
-        [Display(Name = "cont.")]
+        [Display(Name = "Address Cont.")]
         public string StreetAddress2 { get; set; }
 
         //[Required]
