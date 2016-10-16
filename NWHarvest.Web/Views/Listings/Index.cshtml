@@ -33,38 +33,39 @@
 
 @{ var ListingForTitles = Model.TopList.FirstOrDefault(); }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.Grower.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.product)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.qtyOffered)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.qtyClaimed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.qtyLabel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.expire_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.cost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.available)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => ListingForTitles.comments)
-        </th>
-        <th></th>
-    </tr>
-
+<table class="table" id="TopTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.Grower.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.qtyOffered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.qtyClaimed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.qtyLabel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.expire_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ListingForTitles.comments)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
     @foreach (var item in Model.TopList) {
         <tr>
             <td>
@@ -182,6 +183,13 @@
         </tr>
     }
 
-
-
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/javascript")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#TopTable').DataTable();
+        })
+    </script>
+}
