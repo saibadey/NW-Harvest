@@ -115,7 +115,7 @@ namespace NWHarvest.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
             return View(listing);
         }
 
@@ -131,7 +131,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
             return View(listing);
         }
 
@@ -147,7 +147,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
             return View(listing);
         }
 
@@ -165,7 +165,7 @@ namespace NWHarvest.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
             return View(listing);
         }
 
@@ -188,7 +188,7 @@ namespace NWHarvest.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
             return View(listing);
         }
 

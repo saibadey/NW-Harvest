@@ -7,7 +7,7 @@ namespace NWHarvest.Web.Models
 {
     public class ListingsRepository
     {
-        private NWHarvestEntities db = new NWHarvestEntities();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public IEnumerable<Listing> GetAllAvailable()
         {
@@ -18,7 +18,7 @@ namespace NWHarvest.Web.Models
         public IEnumerable<Listing> GetAvailableByGrower(int growerId)
         {
             return (from b in db.Listings
-                    where b.available == true & b.listing_farmer == growerId
+                    where b.available == true & b.Grower.Id == growerId
                     select b).ToList();
         }
 
@@ -41,7 +41,7 @@ namespace NWHarvest.Web.Models
                     where ((b.available == false
                     || b.expire_date < currentDate)
                     & b.expire_date > oldestAcceptableDate
-                    & b.listing_farmer == growerId)
+                    & b.Grower.Id == growerId)
                     select b).ToList();
         }
 
@@ -53,7 +53,7 @@ namespace NWHarvest.Web.Models
                     where ((b.available == false
                     || b.expire_date < currentDate)
                     & b.expire_date > oldestAcceptableDate
-                    & b.Farmer.id == foodBankId)
+                    & b.FoodBank.Id == foodBankId)
                     select b).ToList();
         }
     }

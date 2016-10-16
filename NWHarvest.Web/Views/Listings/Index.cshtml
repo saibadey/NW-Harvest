@@ -36,7 +36,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => ListingForTitles.listing_farmer)
+            @Html.DisplayNameFor(model => ListingForTitles.Grower.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => ListingForTitles.product)
@@ -68,7 +68,7 @@
     @foreach (var item in Model.TopList) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Farmer.name)
+                @Html.DisplayFor(modelItem => item.Grower.name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.product)
@@ -120,7 +120,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => ListingForTitles.listing_farmer)
+            @Html.DisplayNameFor(model => ListingForTitles.Grower.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => ListingForTitles.product)
@@ -153,7 +153,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Farmer.name)
+                @Html.DisplayFor(modelItem => item.Grower.name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.product)
