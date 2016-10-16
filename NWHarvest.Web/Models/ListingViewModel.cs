@@ -82,7 +82,14 @@ namespace NWHarvest.Web.Models
             }
             set
             {
-                this.SavedLocationId = value.id.ToString();
+                if (value != null)
+                {
+                    this.SavedLocationId = value.id.ToString();
+                }
+                else
+                {
+                    this.SavedLocationId = null;
+                }
             }
         }
     }
