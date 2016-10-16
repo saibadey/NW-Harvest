@@ -11,14 +11,21 @@ namespace NWHarvest.Web.Models
 
         public IEnumerable<Listing> GetAllAvailable()
         {
+            var currentDate = DateTime.Now;
             return (from b in db.Listings
                         where b.available == true
+                            & b.expire_date >= currentDate
+                        orderby b.id descending 
                         select b).ToList();
         }
         public IEnumerable<Listing> GetAvailableByGrower(int growerId)
         {
+            var currentDate = DateTime.Now;
             return (from b in db.Listings
-                    where b.available == true & b.Grower.Id == growerId
+                    where b.available == true 
+                        & b.Grower.Id == growerId
+                        & b.expire_date >= currentDate
+                    orderby b.id descending
                     select b).ToList();
         }
 
@@ -28,11 +35,12 @@ namespace NWHarvest.Web.Models
             var currentDate = DateTime.Now;
             return (from b in db.Listings
                     where((b.available == false 
-                    || b.expire_date < currentDate)
-                    & b.expire_date > oldestAcceptableDate)
+                        || b.expire_date < currentDate)
+                        & b.expire_date > oldestAcceptableDate)
+                    orderby b.id descending
                     select b).ToList();
         }
-
+    
         public IEnumerable<Listing> GetUnavailableExpired(int growerId, int daysSinceCreation)
         {
             var oldestAcceptableDate = DateTime.Now.AddDays(-daysSinceCreation);
@@ -42,6 +50,7 @@ namespace NWHarvest.Web.Models
                     || b.expire_date < currentDate)
                     & b.expire_date > oldestAcceptableDate
                     & b.Grower.Id == growerId)
+                    orderby b.id descending
                     select b).ToList();
         }
 
@@ -52,6 +61,7 @@ namespace NWHarvest.Web.Models
                     where (b.available == false
                     & b.expire_date > oldestAcceptableDate
                     & b.FoodBank.Id == foodBankId)
+                    orderby b.id descending
                     select b).ToList();
         }
 
