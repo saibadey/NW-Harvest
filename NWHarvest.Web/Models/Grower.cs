@@ -52,7 +52,7 @@ namespace NWHarvest.Web.Models
         [StringLength(9)]
         public string zip { get; set; }
 
-        public string NoficationPreference { get; set; }
+        public string NotificationPreference { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PickupLocation> PickupLocations { get; set; }

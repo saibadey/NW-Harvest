@@ -45,7 +45,7 @@ namespace NWHarvest.Web.Models
         [StringLength(9)]
         public string zip { get; set; }
 
-        public string NoficationPreference { get; set; }
+        public string NotificationPreference { get; set; }
 
     }
 }
