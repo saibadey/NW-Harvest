@@ -125,7 +125,7 @@ namespace NWHarvest.Web.Models
         public string State { get; set; }
 
         [Required]
-        [Display(Name = "Zip-Code")]
+        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
 
         [Required]
