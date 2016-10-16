@@ -188,10 +188,14 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Claim([Bind(Include = "id,comments")] Listing listing)
+        public ActionResult Claim([Bind(Include = "id,product")] Listing listing)
         {
-            if (ModelState.IsValid)
-            {
+            var id = listing.id;
+
+
+
+            //if (ModelState.IsValid)
+            //{
                 var theComments = listing.comments;
                 listing = db.Listings.FirstOrDefault(p => p.id == listing.id);
 
@@ -236,9 +240,9 @@ namespace NWHarvest.Web.Controllers
                 db.Entry(listing).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            ViewBag.Grower = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
-            return View(listing);
+            //}
+            //ViewBag.Grower = new SelectList(db.Growers, "id", "name", listing.Grower.Id);
+            //return View(listing);
         }
 
         // GET: Listings/Delete/5

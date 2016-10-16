@@ -4,19 +4,19 @@
     if (Model.registeredUser.Role == "admin")
     {
         ViewBag.TopTitle = "All Available Produce";
-        ViewBag.BottomTitle = "No Longer Available and Expired Produce";
+        ViewBag.BottomTitle = "No Longer Available and Expired Produce for last 180 Days";
     }
 
     if (Model.registeredUser.Role == "grower")
     {
         ViewBag.TopTitle = "My Available Produce";
-        ViewBag.BottomTitle = "My Claimed and Expired Produce";
+        ViewBag.BottomTitle = "My Claimed and Expired Produce for Last 30 Days";
     }
 
     if (Model.registeredUser.Role == "foodBank")
     {
         ViewBag.TopTitle = "Available Produce";
-        ViewBag.BottomTitle = "My Claimed Produce";
+        ViewBag.BottomTitle = "My Claimed Produce for Last 30 Days";
     }
 }
 
