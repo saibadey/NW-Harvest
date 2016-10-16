@@ -97,19 +97,19 @@
                 @Html.DisplayFor(modelItem => item.comments)
             </td>
             <td>
+                <!--Only food banks can claim food.-->
+                @if (Model.registeredUser.Role == "foodBank" || Model.registeredUser.Role == "admin")
+                {
+                    @Html.ActionLink("Claim", "Claim", new { id = item.id }) <b> | </b>
+                }
                 <!--Add check for if authorized to edit or delete (growers and admins only)-->
                 @if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
                 {
                     @Html.ActionLink("Edit", "Edit", new { id = item.id })
-                    <b>|</b>
+                    <b> | </b>
                     @Html.ActionLink("Delete", "Delete", new { id = item.id })
                 }
                 
-                <!--Only food banks can claim food.-->
-                @if (Model.registeredUser.Role == "foodBank")
-                {
-                    @Html.ActionLink("Claim", "Claim", new { id = item.id })
-                }
                 
             </td>
         </tr>
