@@ -17,7 +17,7 @@ namespace NWHarvest.Web.Controllers
         // GET: Listings
         public ActionResult Index()
         {
-            var listings = db.Listings.Include(l => l.Farmer);
+            var listings = db.Listings.Include(l => l.FoodBank);
             return View(listings.ToList());
         }
 
@@ -57,7 +57,7 @@ namespace NWHarvest.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
             return View(listing);
         }
 
@@ -73,7 +73,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
             return View(listing);
         }
 
@@ -89,7 +89,7 @@ namespace NWHarvest.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
             return View(listing);
         }
 
@@ -107,7 +107,7 @@ namespace NWHarvest.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
             return View(listing);
         }
 
@@ -129,7 +129,7 @@ namespace NWHarvest.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.listing_farmer);
+            ViewBag.listing_farmer = new SelectList(db.Growers, "id", "name", listing.Grower.id);
             return View(listing);
         }
 
