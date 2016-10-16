@@ -23,12 +23,19 @@ textarea {
     max-width: 280px;
 }
 
-.userType {
+.userType, .notifType {
+    margin-bottom: 30px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: space-between;
-    max-width: 50%;
+}
+
+.userType select, .notifType select {
+    margin-left: 15px;
+}
+
+.customRegister {
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 100px;
 }
 
 .navbar-collapse {
