@@ -1,7 +1,0 @@
-{
-	"name": "asp.net",
-	"private": true,
-  "dependencies": {
-    "moment": "2.15.1"
-  }
-}
