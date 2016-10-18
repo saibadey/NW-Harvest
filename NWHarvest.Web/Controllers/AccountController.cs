@@ -169,40 +169,42 @@ namespace NWHarvest.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    
+
                     if (model.UserType == "IsFoodBank")
                     {
-                        db.FoodBanks.Add(new FoodBank {
-                            UserId = user.Id,
-                            name = model.Name,
-                            email = model.Email,
-                            phone = model.PhoneNumber,
-                            address1 = model.StreetAddress1,
-                            address2 = model.StreetAddress2,
-                            city = model.City,
-                            state = model.State,
-                            zip = model.ZipCode,
-                            NotificationPreference = model.Notification
-                        });
+                        db.FoodBanks.Add(
+                            new FoodBank()
+                                {
+                                    UserId = user.Id,
+                                    name = model.Name,
+                                    email = model.Email,
+                                    phone = model.PhoneNumber,
+                                    address1 = model.StreetAddress1,
+                                    address2 = model.StreetAddress2 == null ? "" : model.StreetAddress2,
+                                    city = model.City,
+                                    state = model.State,
+                                    zip = model.ZipCode,
+                                    NotificationPreference = model.Notification
+                                });
                     }
                     else if (model.UserType == "IsGrower")
                     {
-                        db.Growers.Add(new Grower {
-                            UserId = user.Id,
-                            name = model.Name,
-                            email = model.Email,
-                            phone = model.PhoneNumber,
-                            address1 = model.StreetAddress1,
-                            address2 = model.StreetAddress2,
-                            city = model.City,
-                            state = model.State,
-                            zip = model.ZipCode,
-                            NotificationPreference = model.Notification
-                        });
+                        db.Growers.Add(
+                            new Grower
+                                {
+                                    UserId = user.Id,
+                                    name = model.Name,
+                                    email = model.Email,
+                                    phone = model.PhoneNumber,
+                                    address1 = model.StreetAddress1,
+                                    address2 = model.StreetAddress2 == null? "": model.StreetAddress2,
+                                    city = model.City,
+                                    state = model.State,
+                                    zip = model.ZipCode,
+                                    NotificationPreference = model.Notification
+                                });
                     }
-                    else //admin
-                    {
-                    }
+
                     db.SaveChanges();
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
