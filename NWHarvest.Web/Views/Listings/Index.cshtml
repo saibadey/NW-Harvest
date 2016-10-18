@@ -3,132 +3,159 @@
 @{
     if (Model.registeredUser.Role == "admin")
     {
+        ViewBag.AvailableListTitle = "All Available";
+        ViewBag.NoLongerAvailableTitle = "Historical Listings";
         ViewBag.TopTitle = "All Available Produce";
         ViewBag.BottomTitle = "No Longer Available and Expired Produce for last 180 Days";
     }
 
     if (Model.registeredUser.Role == "grower")
     {
+        ViewBag.AvailableListTitle = "Current Listings";
+        ViewBag.NoLongerAvailableTitle = "Historical Listings";
         ViewBag.TopTitle = "My Available Produce";
         ViewBag.BottomTitle = "My Claimed and Expired Produce for Last 30 Days";
     }
 
     if (Model.registeredUser.Role == "foodBank")
     {
+        ViewBag.AvailableListTitle = "Current Listings";
+        ViewBag.NoLongerAvailableTitle = "Historical Listings";
         ViewBag.TopTitle = "Available Produce";
         ViewBag.BottomTitle = "My Claimed Produce for Last 30 Days";
     }
 }
 
-<h2>@ViewBag.TopTitle</h2>
-
-<!--Only allow admins and growers to add listings-->
-@if (Model.registeredUser.Role == "grower")
-{
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
-
 @{ var ListingForTitles = Model.TopList.FirstOrDefault(); }
 
-<table class="table" id="TopTable">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.Grower.name)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.product)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.qtyOffered)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.qtyLabel)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.harvested_date)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.expire_date)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.cost)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.comments)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.city)</th>
-            <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.zip)</th>
-            <th></th>
-        </tr>
-    </thead>
-    @foreach (var item in Model.TopList) {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Grower.name)</td>
-            <td>@Html.DisplayFor(modelItem => item.product)</td>
-            <td>@Html.DisplayFor(modelItem => item.qtyOffered)</td>
-            <td>@Html.DisplayFor(modelItem => item.qtyLabel)</td>
-            <td>@Html.DisplayFor(modelItem => item.harvested_date)</td>
-            <td>@Html.DisplayFor(modelItem => item.expire_date)</td>
-            <td>@Html.DisplayFor(modelItem => item.cost)</td>
-            <td>@Html.DisplayFor(modelItem => item.comments)</td>
-            <td>@Html.DisplayFor(modelItem => item.PickupLocation.city)</td>
-            <td>@Html.DisplayFor(modelItem => item.PickupLocation.zip)</td>
-            <td>
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">@ViewBag.AvailableListTitle</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">@ViewBag.NoLongerAvailableTitle</a></li>
+    </ul>
 
-                @Html.ActionLink("Details", "Details", new { id = item.id })
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            
+            <h2>@ViewBag.TopTitle</h2>
 
-                <!--Add check for if authorized to edit or delete (growers and admins only)-->
-                @if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
+            <!--Only allow admins and growers to add listings-->
+            @if (Model.registeredUser.Role == "grower")
+            {
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+            }
+
+            <table class="table table-striped table-bordered table-hover table-responsive" id="TopTable">
+                <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.Grower.name)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.product)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.qtyOffered)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.qtyLabel)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.harvested_date)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.expire_date)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.cost)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.comments)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.city)</th>
+                    <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.zip)</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                @foreach (var item in Model.TopList)
                 {
-                    @*
-                    <b>|</b>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id })
-                    *@
-                    <b> | </b>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Grower.name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.product)</td>
+                        <td>@Html.DisplayFor(modelItem => item.qtyOffered)</td>
+                        <td>@Html.DisplayFor(modelItem => item.qtyLabel)</td>
+                        <td>@Html.DisplayFor(modelItem => item.harvested_date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.expire_date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.cost)</td>
+                        <td>@Html.DisplayFor(modelItem => item.comments)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PickupLocation.city)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PickupLocation.zip)</td>
+                        <td>
+
+                            @Html.ActionLink("Details", "Details", new { id = item.id })
+
+                            <!--Add check for if authorized to edit or delete (growers and admins only)-->
+                            @if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
+                            {
+                                @*
+                                    <b>|</b>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                                *@
+                                <b> | </b>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                            }
+                            <!--Only food banks can claim food.-->
+                            @if (Model.registeredUser.Role == "foodBank")
+                            {
+                                <b>|</b>
+                                @Html.ActionLink("Claim", "Claim", new { id = item.id })
+                            }
+                        </td>
+                    </tr>
                 }
-                <!--Only food banks can claim food.-->
-                @if (Model.registeredUser.Role == "foodBank")
+            </table>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="profile">
+            
+            <h2>@ViewBag.BottomTitle</h2>
+
+            <table class="table table-striped table-bordered table-hover table-responsive" id="HistoricalTable">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.Grower.name)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.product)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.qtyOffered)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.qtyLabel)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.harvested_date)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.expire_date)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.cost)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.available)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.comments)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.city)</th>
+                        <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.zip)</th>
+                        <th>Directions</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.BottomList)
                 {
-                    <b>|</b>
-                    @Html.ActionLink("Claim", "Claim", new { id = item.id })
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Grower.name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.product)</td>
+                        <td>@Html.DisplayFor(modelItem => item.qtyOffered)</td>
+                        <td>@Html.DisplayFor(modelItem => item.qtyLabel)</td>
+                        <td>@Html.DisplayFor(modelItem => item.harvested_date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.expire_date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.cost)</td>
+                        <td>@((bool)item.available ? "No" : "Yes")</td>
+                        <td>@Html.DisplayFor(modelItem => item.comments)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PickupLocation.city)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PickupLocation.zip)</td>
+                        <td><a target="_blank" href='@string.Format("https://www.google.com/maps/dir/{0}+{1}+{2}+{3}/{4}+{5}+{6}+{7}", item.FoodBank.address1, item.FoodBank.city, item.FoodBank.state, item.FoodBank.zip, item.Grower.address1, item.Grower.city, item.Grower.state, item.Grower.zip)'>Get Directions</a></td>
+                    </tr>
                 }
-            </td>
-        </tr>
-    }
-</table>
 
-<h2>@ViewBag.BottomTitle</h2>
+            </table>
+        </div>
+    </div>
+</div>
 
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.Grower.name)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.product)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.qtyOffered)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.qtyLabel)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.harvested_date)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.expire_date)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.cost)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.available)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.comments)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.city)</th>
-        <th>@Html.DisplayNameFor(model => ListingForTitles.PickupLocation.zip)</th>
-        <th>Directions</th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model.BottomList)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Grower.name)</td>
-            <td>@Html.DisplayFor(modelItem => item.product)</td>
-            <td>@Html.DisplayFor(modelItem => item.qtyOffered)</td>
-            <td>@Html.DisplayFor(modelItem => item.qtyLabel)</td>
-            <td>@Html.DisplayFor(modelItem => item.harvested_date)</td>
-            <td>@Html.DisplayFor(modelItem => item.expire_date)</td>
-            <td>@Html.DisplayFor(modelItem => item.cost)</td>
-            <td>@((bool)item.available ? "No" : "Yes")</td>
-            <td>@Html.DisplayFor(modelItem => item.comments)</td>
-            <td>@Html.DisplayFor(modelItem => item.PickupLocation.city)</td>
-            <td>@Html.DisplayFor(modelItem => item.PickupLocation.zip)</td>
-            <td><a target="_blank" href='@string.Format("https://www.google.com/maps/dir/{0}+{1}+{2}+{3}/{4}+{5}+{6}+{7}", item.FoodBank.address1, item.FoodBank.city, item.FoodBank.state, item.FoodBank.zip, item.Grower.address1, item.Grower.city, item.Grower.state, item.Grower.zip)'>Get Directions</a></td>
-        </tr>
-    }
-
-</table>
 
 @section Scripts {
     @Scripts.Render("~/bundles/javascript")
     <script type="text/javascript">
         $(document).ready(function () {
             $('#TopTable').DataTable();
+            $('#HistoricalTable').DataTable();
         })
     </script>
 }
