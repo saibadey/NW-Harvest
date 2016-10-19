@@ -108,7 +108,7 @@
             
             <h2>@ViewBag.BottomTitle</h2>
 
-            <table class="table table-striped table-bordered table-hover table-responsive" id="HistoricalTable">
+            <table class="table table-striped table-bordered table-hover table-responsive dataTables_scroll" id="HistoricalTable">
                 <thead>
                     <tr>
                         <th>@Html.DisplayNameFor(model => ListingForTitles.Grower.name)</th>
@@ -151,11 +151,13 @@
 
 
 @section Scripts {
-    @Scripts.Render("~/bundles/javascript")
-    <script type="text/javascript">
+@Scripts.Render("~/bundles/javascript")
+
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+<script type="text/javascript">
         $(document).ready(function () {
-            $('#TopTable').DataTable();
-            $('#HistoricalTable').DataTable();
-        })
-    </script>
+            $(".table").dataTable({
+            });
+    });
+</script>
 }
