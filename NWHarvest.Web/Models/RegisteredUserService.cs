@@ -33,21 +33,21 @@ namespace NWHarvest.Web.Models
 
             if (growersResults.Any())
             {
-                registeredUser.Role = "grower";
+                registeredUser.Role = UserRoles.GrowerRole;
                 registeredUser.GrowerId = growersResults.FirstOrDefault().Id;
                 registeredUser.UserName = growersResults.FirstOrDefault().name;
             }
 
             else if (foodBankResults.Any())
             {
-                registeredUser.Role = "foodBank";
+                registeredUser.Role = UserRoles.FoodBankRole;
                 registeredUser.FoodBankId = foodBankResults.FirstOrDefault().Id;
                 registeredUser.UserName = foodBankResults.FirstOrDefault().name;
             }
 
             else
             {
-                registeredUser.Role = "admin";
+                registeredUser.Role = UserRoles.AdministratorRole;
             }
 
             return registeredUser;

@@ -1,7 +1,8 @@
-﻿@model NWHarvest.Web.Controllers.ViewLists
+﻿@using NWHarvest.Web.Models
+@model NWHarvest.Web.Controllers.ViewLists
 
 @{
-    if (Model.registeredUser.Role == "admin")
+    if (Model.registeredUser.Role == UserRoles.AdministratorRole)
     {
         ViewBag.AvailableListTitle = "All Available";
         ViewBag.NoLongerAvailableTitle = "Historical Listings";
@@ -9,7 +10,7 @@
         ViewBag.BottomTitle = "No Longer Available and Expired Produce for last 180 Days";
     }
 
-    if (Model.registeredUser.Role == "grower")
+    if (Model.registeredUser.Role == UserRoles.GrowerRole)
     {
         ViewBag.AvailableListTitle = "Current Listings";
         ViewBag.NoLongerAvailableTitle = "Historical Listings";
@@ -17,7 +18,7 @@
         ViewBag.BottomTitle = "My Claimed and Expired Produce for Last 30 Days";
     }
 
-    if (Model.registeredUser.Role == "foodBank")
+    if (Model.registeredUser.Role == UserRoles.FoodBankRole)
     {
         ViewBag.AvailableListTitle = "Current Listings";
         ViewBag.NoLongerAvailableTitle = "Historical Listings";
@@ -41,7 +42,7 @@
             <h2>@ViewBag.TopTitle</h2>
 
             <!--Only allow admins and growers to add listings-->
-            @if (Model.registeredUser.Role == "grower")
+            @if (Model.registeredUser.Role == UserRoles.GrowerRole)
             {
                 <p>
                     @Html.ActionLink("Create New", "Create")
@@ -82,7 +83,7 @@
                             @Html.ActionLink("Details", "Details", new { id = item.id })
 
                             <!--Add check for if authorized to edit or delete (growers and admins only)-->
-                            @if (Model.registeredUser.Role == "admin" || Model.registeredUser.Role == "grower")
+                            @if (Model.registeredUser.Role == UserRoles.AdministratorRole || Model.registeredUser.Role == UserRoles.GrowerRole)
                             {
                                 @*
                                     <b>|</b>
@@ -92,7 +93,7 @@
                                 @Html.ActionLink("Delete", "Delete", new { id = item.id })
                             }
                             <!--Only food banks can claim food.-->
-                            @if (Model.registeredUser.Role == "foodBank")
+                            @if (Model.registeredUser.Role == UserRoles.FoodBankRole)
                             {
                                 <b>|</b>
                                 @Html.ActionLink("Claim", "Claim", new { id = item.id })

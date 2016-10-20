@@ -32,29 +32,31 @@ namespace NWHarvest.Web.Controllers
         {
             var registeredUserService = new RegisteredUserService();
             var user = registeredUserService.GetRegisteredUser(this.User);
+            ViewBag.userRole = user.Role;
 
             var repo = new ListingsRepository();
             var viewLists = new ViewLists();
             viewLists.registeredUser = user;
+            
 
-            if (user.Role == "admin")
+            if (user.Role == UserRoles.AdministratorRole)
             {
                 viewLists.TopList = repo.GetAllAvailable();
                 viewLists.BottomList = repo.GetAllUnavailableExpired(DAY_LIMIT_FOR_ADMINISTRATORS);
             }
 
-            else if (user.Role == "grower")
+            else if (user.Role == UserRoles.GrowerRole)
             {
                 viewLists.TopList = repo.GetAvailableByGrower(user.GrowerId);
                 viewLists.BottomList = repo.GetUnavailableExpired(user.GrowerId, DAY_LIMIT_FOR_GROWERS);
             }
 
-            else if (user.Role == "foodBank")
+            else if (user.Role == UserRoles.FoodBankRole)
             {
                 viewLists.TopList = repo.GetAllAvailable();
                 viewLists.BottomList = repo.GetClaimedByFoodBank(user.FoodBankId, DAY_LIMIT_FOR_FOOD_BANKS);
             }
-
+            
             return View(viewLists);
         }
 

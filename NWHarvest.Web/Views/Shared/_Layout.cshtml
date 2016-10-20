@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using NWHarvest.Web.Models
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,10 +28,19 @@
                     @if (this.User.Identity.Name != "")
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Growers", "Index", "Growers")</li>
-                        <li>@Html.ActionLink("Food Banks", "Index", "FoodBanks")</li>
+
+                        if (ViewBag.userRole == UserRoles.AdministratorRole)
+                        {
+                            <li>@Html.ActionLink("Growers", "Index", "Growers")</li>
+                            <li>@Html.ActionLink("Food Banks", "Index", "FoodBanks")</li>
+                        }
+                        
+                        if (ViewBag.userRole == UserRoles.GrowerRole || ViewBag.userRole == UserRoles.FoodBankRole)
+                        {
+                            <li>@Html.ActionLink("My Locations", "Index", "PickupLocations")</li>
+                        }
+
                         <li>@Html.ActionLink("Available Produce", "Index", "Listings")</li>
-                        <li>@Html.ActionLink("My Locations", "Index", "PickupLocations")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

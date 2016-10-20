@@ -20,6 +20,8 @@ namespace NWHarvest.Web.Controllers
         {
             var registeredUserService = new RegisteredUserService();
             var user = registeredUserService.GetRegisteredUser(this.User);
+            ViewBag.userRole = user.Role;
+
 
             var pickupLocations = db.PickupLocations.Include(p => p.Grower);
             return View(pickupLocations.ToList());
