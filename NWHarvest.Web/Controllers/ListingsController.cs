@@ -32,13 +32,11 @@ namespace NWHarvest.Web.Controllers
         {
             var registeredUserService = new RegisteredUserService();
             var user = registeredUserService.GetRegisteredUser(this.User);
-            ViewBag.userRole = user.Role;
 
             var repo = new ListingsRepository();
             var viewLists = new ViewLists();
             viewLists.registeredUser = user;
             
-
             if (user.Role == UserRoles.AdministratorRole)
             {
                 viewLists.TopList = repo.GetAllAvailable();
@@ -80,7 +78,6 @@ namespace NWHarvest.Web.Controllers
         {
             var registeredUserService = new RegisteredUserService();
             var user = registeredUserService.GetRegisteredUser(this.User);
-
 
             ListingViewModel listingViewModel = new ListingViewModel();
             listingViewModel.Grower = db.Growers.Where(g => g.Id == user.GrowerId).FirstOrDefault();
@@ -189,10 +186,8 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,expire_date,cost,comments")] Listing listing)
+        public ActionResult Edit([Bind(Include = "id,product,qtyOffered,qtyClaimed,qtyLabel,available,harvested_date,expire_date,cost,comments")] Listing listing)
         {
-
-
             if (ModelState.IsValid)
             {
                 db.Entry(listing).State = EntityState.Modified;
@@ -208,7 +203,7 @@ namespace NWHarvest.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Claim([Bind(Include = "id,product")] Listing listing)
+        public ActionResult Claim([Bind(Include = "id,product,comments")] Listing listing)
         {
             var id = listing.id;
 

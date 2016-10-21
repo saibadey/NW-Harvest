@@ -25,16 +25,21 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
                     @if (this.User.Identity.Name != "")
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
+                        var registeredUserService = new RegisteredUserService();
+                        var user = registeredUserService.GetRegisteredUser(this.User);
+                        ViewBag.userRole = user.Role;
+                        
                         if (ViewBag.userRole == UserRoles.AdministratorRole)
                         {
                             <li>@Html.ActionLink("Growers", "Index", "Growers")</li>
                             <li>@Html.ActionLink("Food Banks", "Index", "FoodBanks")</li>
                         }
-                        
+
                         if (ViewBag.userRole == UserRoles.GrowerRole || ViewBag.userRole == UserRoles.FoodBankRole)
                         {
                             <li>@Html.ActionLink("My Locations", "Index", "PickupLocations")</li>

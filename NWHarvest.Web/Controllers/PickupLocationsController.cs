@@ -18,11 +18,6 @@ namespace NWHarvest.Web.Controllers
         // GET: PickupLocations
         public ActionResult Index()
         {
-            var registeredUserService = new RegisteredUserService();
-            var user = registeredUserService.GetRegisteredUser(this.User);
-            ViewBag.userRole = user.Role;
-
-
             var pickupLocations = db.PickupLocations.Include(p => p.Grower);
             return View(pickupLocations.ToList());
         }

@@ -4,15 +4,13 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
+<h2>Edit Listing</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Listing</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
@@ -34,14 +32,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.qtyClaimed, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.qtyClaimed, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.qtyClaimed, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.qtyLabel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.qtyLabel, new { htmlAttributes = new { @class = "form-control" } })
@@ -52,7 +42,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.harvested_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.harvested_date, new { htmlAttributes = new { @class = "form-control" } })
+                <!--see documentation for datepicker control at http://www.eyecon.ro/bootstrap-datepicker/ -->
+                <div class="input-append date" id="harvdate" data-date="12-1-2016" data-dateformat="yyyy-mm-dd">
+                    @Html.EditorFor(model => model.harvested_date, new { htmlAttributes = new { @class = "form-control span2", size = "16" } })
+                    <span class="add-on"><i class="glyphicon-calendar glyphicon"></i></span>
+                </div>
                 @Html.ValidationMessageFor(model => model.harvested_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,9 +54,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.expire_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.expire_date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.expire_date, "", new { @class = "text-danger" })
-            </div>
+                <!--see documentation for datepicker control at http://www.eyecon.ro/bootstrap-datepicker/ -->
+                <div class="input-append date" id="expdate" data-date="12-1-2016" data-dateformat="dd-mm-yyyy">
+                    @Html.EditorFor(model => model.expire_date, new {htmlAttributes = new {@class = "form-control span2", size = "16", placeholder="Listing valid until"}})
+                    <span class="add-on"><i class="glyphicon-calendar glyphicon"></i></span>
+                </div>
+                @Html.ValidationMessageFor(model => model.expire_date, "", new {@class = "text-danger"})
+             </div>
         </div>
 
         <div class="form-group">
@@ -88,6 +86,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.comments, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.comments, "", new { @class = "text-danger" })
+                <p>Please include any relevant scheduling and pickup instructions.</p>
             </div>
         </div>
 
@@ -105,4 +104,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#harvdate').datepicker();
+        $('#expdate').datepicker();
+    </script>
 }

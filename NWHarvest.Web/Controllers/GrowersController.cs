@@ -18,10 +18,6 @@ namespace NWHarvest.Web.Controllers
         // GET: Growers
         public ActionResult Index()
         {
-            var registeredUserService = new RegisteredUserService();
-            var user = registeredUserService.GetRegisteredUser(this.User);
-            ViewBag.userRole = user.Role;
-
             return View(db.Growers.ToList());
         }
 

@@ -66,3 +66,11 @@ div.body-content div.text-center a.btn {
 #listingDeets dd{
     margin-bottom: 10px;
 }
+
+.dataTable td {
+    max-width: 150px;
+    min-width: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -48,7 +48,7 @@ namespace NWHarvest.Web.Models
         [DisplayName("Claimed")]
         public bool? available { get; set; }
 
-        [DisplayName("Notes")]
+        [DisplayName("Schedule Pickup")]
         public string comments { get; set; }
 
         [DisplayName("Location")]
